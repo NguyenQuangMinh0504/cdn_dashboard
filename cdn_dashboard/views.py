@@ -1,5 +1,6 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from .db import domain_table
 
 
 def login(request: HttpRequest):
@@ -16,7 +17,9 @@ def login(request: HttpRequest):
 def index(request: HttpRequest):
     context = {}
     if "auth_token" in request.COOKIES:
-        context["auth_token"] = request.COOKIES["auth_token"]
+        auth_token = request.COOKIES["auth_token"]
+        context["auth_token"] = auth_token
+        context["domain"] = domain_table.find_one({"auth_token": auth_token})["domain"]
 
     return render(request=request,
                   template_name="index.html",
@@ -35,8 +38,11 @@ def logout(request: HttpRequest):
 
 def create(request: HttpRequest):
     if request.method == "POST":
-        print("Hello world")
         print(request.POST)
         print(request.COOKIES)
+        domain_table.insert_one(
+            {"auth_token": request.COOKIES["auth_token"],
+             "domain": request.POST["domain"]}
+            )
         return HttpResponseRedirect(redirect_to="/")
     return render(request=request, template_name="create.html", context={})
