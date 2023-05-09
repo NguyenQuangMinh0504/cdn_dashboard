@@ -37,5 +37,6 @@ def create(request: HttpRequest):
     if request.method == "POST":
         print("Hello world")
         print(request.POST)
+        print(request.COOKIES)
         return HttpResponseRedirect(redirect_to="/")
     return render(request=request, template_name="create.html", context={})
