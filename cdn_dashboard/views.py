@@ -36,5 +36,6 @@ def logout(request: HttpRequest):
 def create(request: HttpRequest):
     if request.method == "POST":
         print("Hello world")
+        print(request.POST)
         return HttpResponseRedirect(redirect_to="/")
     return render(request=request, template_name="create.html", context={})
