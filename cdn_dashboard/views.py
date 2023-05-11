@@ -19,8 +19,11 @@ def index(request: HttpRequest):
     if "auth_token" in request.COOKIES:
         auth_token = request.COOKIES["auth_token"]
         context["auth_token"] = auth_token
-        print(domain_table.find_one({"auth_token": auth_token}))
-        # context["domain"] = domain_table.find_one({"auth_token": auth_token})["domain"]
+        domain_data = domain_table.find_one({"auth_token": auth_token})
+        if domain_data is not None:
+            context["domain"] = domain_table.find_one(
+                {"auth_token": auth_token}
+                )["domain"]
 
     return render(request=request,
                   template_name="index.html",
