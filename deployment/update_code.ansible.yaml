@@ -1,0 +1,8 @@
+---
+- hosts: cdn-dashboard
+  become: yes
+  tasks:
+    - name: Synchronize code
+      ansible.posix.synchronize:
+        src: ./
+        dest: /home/nguyenquangminh/
