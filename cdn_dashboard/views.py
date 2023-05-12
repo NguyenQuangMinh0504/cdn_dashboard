@@ -1,6 +1,6 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .db import domain_table
+from .db import domain_table, domain_table_rdb
 
 
 def login(request: HttpRequest):
@@ -42,11 +42,12 @@ def logout(request: HttpRequest):
 
 def create(request: HttpRequest):
     if request.method == "POST":
-        print(request.POST)
-        print(request.COOKIES)
+        domain = request.POST["domain"]
+
         domain_table.insert_one(
             {"auth_token": request.COOKIES["auth_token"],
-             "domain": request.POST["domain"]}
+             "domain": domain}
             )
+        domain_table_rdb.set(name="upstream", value=domain)
         return HttpResponseRedirect(redirect_to="/")
     return render(request=request, template_name="create.html", context={})
