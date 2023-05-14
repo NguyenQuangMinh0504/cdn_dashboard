@@ -4,5 +4,5 @@
   tasks:
     - name: Synchronize code
       ansible.posix.synchronize:
-        src: ./
-        dest: /home/nguyenquangminh/
+        src: /Users/nguyenquangminh/Desktop/PROJECT/solo-projects/cdn_dashboard/
+        dest: /home/nguyenquangminh/cdn_dashboard/
