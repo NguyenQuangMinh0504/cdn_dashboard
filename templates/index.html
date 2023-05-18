@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 {% include 'navbar.html' %}
+
+
+<section style="background: url(/static/hero.jpeg); background-size: cover; background-position: center center" class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <br><br><br><br>
+          <h1 style="color: white; text-align: center;">Sapphire CDN </h1><br><br><br><br><br><br><br><br>
+        </div>
+      
+    </div>
+  </div></section>
   
 
 {% load static %}
 <!-- <img src="http://saugau.edge.vccloud.vn/static/mainpage/images/chad.jpeg" alt="Ảnh này bị lỗi"> -->
 <br>
-<h1>Sapphire CDN</h1>
 <br>
 <br>
 {% if domain %}
@@ -13,4 +24,17 @@
     <h3>{{ domain }}</h3>
 {% else %}
     <h2>Bạn chưa khởi tạo domain nào. Hãy khởi tạo ngay</h2>
+    <h3> </h3>
 {% endif %}
+{% for item in foo %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <p>{{ item }}</p>
+        <form action="/delete/" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Xoá domain</button>
+          <input type="hidden" name="domain" value={{item.name}}>
+         </form>
+    </div>
+{% empty %}
+  <p>No items found.</p>
+{% endfor %}

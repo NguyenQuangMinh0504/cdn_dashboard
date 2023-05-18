@@ -1,14 +1,18 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .db import domain_table, domain_table_rdb
+import secrets
+from .db import domain_table, domain_table_rdb, user_table
+
 
 
 def login(request: HttpRequest):
     if request.method == "POST":
         data = request.POST
-        if data["username"] == "admin" and data["password"] == "password":
+        user = user_table.find_one({"username": data["username"],
+                                    "password": data["password"]})
+        if user is not None:
             response = HttpResponseRedirect(redirect_to="/")
-            response.set_cookie(key="auth_token", value="token")
+            response.set_cookie(key="auth_token", value=user["auth_token"])
             return response
 
     return render(request=request, template_name="login.html", context={})
@@ -20,10 +24,12 @@ def index(request: HttpRequest):
         auth_token = request.COOKIES["auth_token"]
         context["auth_token"] = auth_token
         domain_data = domain_table.find_one({"auth_token": auth_token})
+
         if domain_data is not None:
             context["domain"] = domain_table.find_one(
                 {"auth_token": auth_token}
                 )["domain"]
+    context["foo"] = [{"name": "abc"}, {"name": "def"}, {"name": "xyz"}, {"name": "foo"}]
 
     return render(request=request,
                   template_name="index.html",
@@ -31,6 +37,19 @@ def index(request: HttpRequest):
 
 
 def register(request: HttpRequest):
+    if request.method == "POST":
+        data = request.POST
+        auth_token = secrets.token_hex(16)
+        user_table.insert_one(
+            {"username": data["username"],
+             "email": data["email"],
+             "password": data["password"],
+             "auth_token": auth_token,
+             }
+            )
+        response = HttpResponseRedirect(redirect_to="/")
+        response.set_cookie(key="auth_token", value=auth_token)
+        return response
     return render(request=request, template_name="register.html", context={})
 
 
@@ -48,6 +67,12 @@ def create(request: HttpRequest):
             {"auth_token": request.COOKIES["auth_token"],
              "domain": domain}
             )
-        domain_table_rdb.set(name="upstream", value=domain)
+        domain_table_rdb.set(name="cdn." + domain, value=domain)
         return HttpResponseRedirect(redirect_to="/")
     return render(request=request, template_name="create.html", context={})
+
+
+def delete(request: HttpRequest):
+    if request.method == "POST":
+        print(request.POST)
+        return HttpResponseRedirect(redirect_to="/")
