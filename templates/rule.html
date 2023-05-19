@@ -32,9 +32,22 @@
     selectBox.addEventListener("change", () => {
         const selectedValue = selectBox.value;
         if (selectedValue === '1') {
+            // Add a new element to the content div
             const newParagraph = document.createElement('p');
             newParagraph.textContent = 'Some more content here';
             contentDiv.appendChild(newParagraph);
+        } else if (selectedValue === '2') {
+            // Remove the second paragraph from the content div
+            const paragraphs = contentDiv.getElementsByTagName('p');
+            if (paragraphs.length >= 2) {
+            contentDiv.removeChild(paragraphs[1]);
+            }
+        } else if (selectedValue === '3') {
+            // Remove all paragraphs from the content div
+            const paragraphs = contentDiv.getElementsByTagName('p');
+            while (paragraphs.length > 0) {
+            contentDiv.removeChild(paragraphs[0]);
+            }
         }
     })
 </script>
