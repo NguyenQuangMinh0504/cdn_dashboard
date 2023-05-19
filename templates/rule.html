@@ -20,6 +20,21 @@
         <option value="2">Two</option>
         <option value="3">Three</option>
     </select>
+    <div id="content">
+    </div>
   </div>
 </body>
 </html>
+
+<script>
+    const selectBox = document.getElementById("selectBox")
+    const contentDiv = document.getElementById("content")
+    selectBox.addEventListener("change", () => {
+        const selectedValue = selectBox.value;
+        if (selectedValue === '1') {
+            const newParagraph = document.createElement('p');
+            newParagraph.textContent = 'Some more content here';
+            contentDiv.appendChild(newParagraph);
+        }
+    })
+</script>
