@@ -24,7 +24,7 @@ def index(request: HttpRequest):
         auth_token = request.COOKIES["auth_token"]
         context["auth_token"] = auth_token
 
-        if not domain_table.count_documents({"auth_token": auth_token}):
+        if domain_table.count_documents({"auth_token": auth_token}) > 0:
             context['domains'] = []
             for domain in domain_table.find({"auth_token": auth_token}):
                 context['domains'].append(domain)
