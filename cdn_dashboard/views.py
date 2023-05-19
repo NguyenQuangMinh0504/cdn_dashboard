@@ -94,4 +94,4 @@ def rule(request: HttpRequest):
         auth_token = request.COOKIES["auth_token"]
         context["auth_token"] = auth_token
 
-    return render(request=request, template_name="rule.html", context={})
+    return render(request=request, template_name="rule.html", context=context)
