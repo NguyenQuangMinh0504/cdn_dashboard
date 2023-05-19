@@ -23,7 +23,7 @@
     <h2>Domain đã khởi tạo</h2>
     {% for domain in domains %}
     <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-        <p>{{ item }}</p>
+        <p>{{ domain.domain }}</p>
         <form action="/delete/" method="post">
           {% csrf_token %}
           <button type="submit" class="btn btn-primary">Xoá domain</button>
