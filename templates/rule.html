@@ -9,18 +9,13 @@
 <body>
   {% include 'navbar.html' %}
   <div class="container">
-    <h2>Sau khi tạo domain, vui lòng chuyển đường dẫn từ file cần chạy qua cdn: Ví dụ example.com/image.png thành cdn.example.com/image.png</h2>
-    <h1 class="text-center">Create new CDN</h1>
-    <form action="/create/" method="post">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="domain" class="form-label">Domain</label>
-        <input type="text" name="domain" class="form-control" id="domain">
-      </div>
-      <div class="mb-3">
-        <input type="submit" value="Confirm" class="btn btn-primary">
-      </div>
-    </form>
+
+    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
   </div>
 </body>
 </html>
