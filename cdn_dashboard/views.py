@@ -89,4 +89,9 @@ def delete(request: HttpRequest):
 
 
 def rule(request: HttpRequest):
+    context = {}
+    if "auth_token" in request.COOKIES:
+        auth_token = request.COOKIES["auth_token"]
+        context["auth_token"] = auth_token
+
     return render(request=request, template_name="rule.html", context={})
