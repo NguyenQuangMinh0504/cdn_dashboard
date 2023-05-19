@@ -23,13 +23,11 @@ def index(request: HttpRequest):
     if "auth_token" in request.COOKIES:
         auth_token = request.COOKIES["auth_token"]
         context["auth_token"] = auth_token
-        domain_data = domain_table.find_one({"auth_token": auth_token})
 
-        if domain_data is not None:
-            context["domain"] = domain_table.find_one(
-                {"auth_token": auth_token}
-                )["domain"]
-    context["foo"] = [{"name": "abc"}, {"name": "def"}, {"name": "xyz"}, {"name": "foo"}]
+        if not domain_table.count_documents({"auth_token": auth_token}):
+            context['domains'] = []
+            for domain in domain_table.find({"auth_token": auth_token}):
+                context['domains'].append(domain)
 
     return render(request=request,
                   template_name="index.html",

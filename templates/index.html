@@ -19,14 +19,9 @@
 <br>
 <br>
 <br>
-{% if domain %}
+{% if domains %}
     <h2>Domain đã khởi tạo</h2>
-    <h3>{{ domain }}</h3>
-{% else %}
-    <h2>Bạn chưa khởi tạo domain nào. Hãy khởi tạo ngay</h2>
-    <h3> </h3>
-{% endif %}
-{% for item in foo %}
+    {% for domain in domains %}
     <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
         <p>{{ item }}</p>
         <form action="/delete/" method="post">
@@ -35,6 +30,9 @@
           <input type="hidden" name="domain" value={{item.name}}>
          </form>
     </div>
-{% empty %}
-  <p>No items found.</p>
-{% endfor %}
+    {% empty %}
+      <p>No items found.</p>
+    {% endfor %}
+{% else %}
+    <h2>Bạn chưa khởi tạo domain nào. Hãy khởi tạo ngay</h2>
+{% endif %}
