@@ -1,8 +1,7 @@
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
 import secrets
 from .db import domain_table, domain_table_rdb, user_table
-
 
 
 def login(request: HttpRequest):
@@ -59,6 +58,9 @@ def logout(request: HttpRequest):
 
 
 def create(request: HttpRequest):
+
+    context = {}
+
     if request.method == "POST":
         domain = request.POST["domain"]
 
@@ -68,7 +70,12 @@ def create(request: HttpRequest):
             )
         domain_table_rdb.set(name="cdn." + domain, value=domain)
         return HttpResponseRedirect(redirect_to="/")
-    return render(request=request, template_name="create.html", context={})
+
+    if "auth_token" in request.COOKIES:
+        auth_token = request.COOKIES["auth_token"]
+        context["auth_token"] = auth_token
+
+    return render(request=request, template_name="create.html", context=context)
 
 
 def delete(request: HttpRequest):
