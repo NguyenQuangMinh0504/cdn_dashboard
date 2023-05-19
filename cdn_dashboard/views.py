@@ -75,5 +75,5 @@ def delete(request: HttpRequest):
     if request.method == "POST":
         data = request.POST
         result = domain_table.delete_many({"domain": data["domain"]})
-        print("Result is: " result)
+        print("Result is: ", result)
         return HttpResponseRedirect(redirect_to="/")
