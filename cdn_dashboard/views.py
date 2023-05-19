@@ -86,3 +86,7 @@ def delete(request: HttpRequest):
         print("domain is:", data["domain"])
         print("Result is: ", result.deleted_count)
         return HttpResponseRedirect(redirect_to="/")
+
+
+def rule(request: HttpRequest):
+    return render(request=request, template_name="rule.html", context={})
