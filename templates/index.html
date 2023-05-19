@@ -27,7 +27,7 @@
         <form action="/delete/" method="post">
           {% csrf_token %}
           <button type="submit" class="btn btn-primary">Xoá domain</button>
-          <input type="hidden" name="domain" value={{item.name}}>
+          <input type="hidden" name="domain" value={{domain.domain}}>
          </form>
     </div>
     {% empty %}
