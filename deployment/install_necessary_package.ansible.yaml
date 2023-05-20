@@ -1,0 +1,40 @@
+---
+- hosts: cdn-dashboard
+  become: yes
+  name: Install necessary package
+  tasks:
+    - name: Install git
+      ansible.builtin.apt:
+        name:
+          - git
+    - name: Install lsof
+      ansible.builtin.apt:
+        name:
+          - lsof
+    - name: Install python venv setup
+      ansible.builtin.apt:
+        name:
+          - python3-venv
+
+    - name: Add openresty GPG key
+      ansible.builtin.apt_key:
+        url: https://openresty.org/package/pubkey.gpg
+    - name: Add openresty repository
+      ansible.builtin.apt_repository:
+        repo: deb http://openresty.org/package/debian bullseye openresty
+    - name: Install openresty package
+      ansible.builtin.apt:
+        name:
+          - openresty
+
+
+    - name: Clone github repository
+      ansible.builtin.git:
+        repo: https://NguyenQuangMinh0504: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@github.com/NguyenQuangMinh0504/cdn_dashboard.git
+        dest: /home/nguyenquangminh/cdn_dashboard/
+        update: yes
+        clone: yes
+        force: yes
+
+    - name: Run openresty server
+      ansible.builtin.command: openresty -c /home/nguyenquangminh/cdn_dashboard/deployment/nginx.conf
