@@ -51,7 +51,7 @@
             const carModelWrapper = document.getElementById('car-model-wrapper');
             carModelWrapper.style.display = "block";
             const models = carModels[selectedValue];
-            compareMethod.innerHTML = NaN
+            compareMethod.innerHTML = ""
             models.forEach((model) => {
             compareMethod.innerHTML += `<option value="${model}">${model}</option>`;
   });
