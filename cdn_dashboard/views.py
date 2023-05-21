@@ -2,6 +2,7 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
 import secrets
 from .db import domain_table, domain_table_rdb, user_table
+from .utils import get_domain_slug
 
 
 def login(request: HttpRequest):
@@ -68,7 +69,9 @@ def create(request: HttpRequest):
             {"auth_token": request.COOKIES["auth_token"],
              "domain": domain}
             )
-        domain_table_rdb.set(name="cdn." + domain, value=domain)
+        domain_slug = get_domain_slug(domain)
+
+        domain_table_rdb.set(name=domain_slug + ".sapphire.com", value=domain)
         return HttpResponseRedirect(redirect_to="/")
 
     if "auth_token" in request.COOKIES:
@@ -86,7 +89,8 @@ def delete(request: HttpRequest):
         domain = data["domain"]
 
         domain_table.delete_many({"domain": domain})
-        result = domain_table_rdb.delete("cdn." + domain)
+        domain_slug = get_domain_slug(domain)
+        result = domain_table_rdb.delete(domain_slug + ".sapphirecdn.com")
         print(result)
 
         return HttpResponseRedirect(redirect_to="/")
