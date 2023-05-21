@@ -2,7 +2,7 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
 import secrets
 from .db import domain_table, domain_table_rdb, user_table
-from .utils import get_domain_slug
+from cdn_dashboard.utils import get_domain_slug
 
 
 def login(request: HttpRequest):
