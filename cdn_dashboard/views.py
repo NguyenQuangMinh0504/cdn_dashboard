@@ -86,7 +86,8 @@ def delete(request: HttpRequest):
         domain = data["domain"]
 
         domain_table.delete_many({"domain": domain})
-        domain_table_rdb.delete(domain)
+        result = domain_table_rdb.delete(domain)
+        print(result)
 
         return HttpResponseRedirect(redirect_to="/")
 
