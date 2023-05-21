@@ -42,7 +42,8 @@
             const newParagraph = document.createElement('p');
             newParagraph.textContent = 'Some more content here';
             const newSelectBox = document.createElement("select")
-            newSelectBox.options
+            const carModelWrapper = document.getElementById('car-model-wrapper');
+            carModelWrapper.style.display = "block";
             contentDiv.appendChild(newParagraph);
         } else if (selectedValue === '2') {
             // Remove the second paragraph from the content div
