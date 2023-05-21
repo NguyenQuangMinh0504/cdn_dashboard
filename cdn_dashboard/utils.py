@@ -7,8 +7,9 @@ def get_domain_slug(url):
     """
     parse_url = urlparse(url=url)
     netloc_parts = parse_url.netloc.split(".")
+
+    print("net loc part is", netloc_parts)
+
     if len(netloc_parts) > 2:
-        print("Net location 1 is: ", netloc_parts[1])
         return netloc_parts[1]
-    print("Net location 0 is", netloc_parts[0])
     return netloc_parts[0]
