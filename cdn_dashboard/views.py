@@ -87,7 +87,7 @@ def delete(request: HttpRequest):
     if request.method == "POST":
         data = request.POST
         domain = data["domain"]
-
+        print("Domain is: ", domain)
         domain_table.delete_many({"domain": domain})
         domain_slug = get_domain_slug(domain)
         print(domain_slug + ".sapphirecdn.com")
