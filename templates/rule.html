@@ -25,7 +25,7 @@
     </div>
     <div class="form-group" id="car-model-wrapper" style="display: none;">
       <label for="car-model">Car Model</label>
-      <select class="form-control" id="car-model">
+      <select class="form-control" id="compare-method">
         <option value="">Select a model</option>
       </select>
     </div>
@@ -41,6 +41,7 @@
   };
     const selectBox = document.getElementById("condition")
     const contentDiv = document.getElementById("content")
+    const compareMethod = document.getElementById("compare-method")
     selectBox.addEventListener("change", () => {
         const selectedValue = selectBox.value;
         if (selectedValue === 'Path') {
@@ -52,7 +53,7 @@
             carModelWrapper.style.display = "block";
             const models = carModels[selectedValue];
             models.forEach((model) => {
-            carModelSelect.innerHTML += `<option value="${model}">${model}</option>`;
+            compareMethod.innerHTML += `<option value="${model}">${model}</option>`;
   });
             contentDiv.appendChild(newParagraph);
         } else if (selectedValue === '2') {
