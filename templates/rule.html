@@ -26,7 +26,6 @@
     <div class="form-group" id="car-model-wrapper" style="display: none;">
       <label for="car-model">Car Model</label>
       <select class="form-control" id="compare-method">
-        <option value="">Select a model</option>
       </select>
     </div>
   </div>
@@ -52,6 +51,7 @@
             const carModelWrapper = document.getElementById('car-model-wrapper');
             carModelWrapper.style.display = "block";
             const models = carModels[selectedValue];
+            compareMethod.innerHTML = NaN
             models.forEach((model) => {
             compareMethod.innerHTML += `<option value="${model}">${model}</option>`;
   });
