@@ -69,9 +69,12 @@ def create(request: HttpRequest):
             {"auth_token": request.COOKIES["auth_token"],
              "domain": domain}
             )
+        
         domain_slug = get_domain_slug(domain)
 
-        domain_table_rdb.set(name=domain_slug + ".sapphire.com", value=domain)
+        domain_table_rdb.set(name=domain_slug + ".sapphirecdn.com",
+                             value=domain)
+        
         return HttpResponseRedirect(redirect_to="/")
 
     if "auth_token" in request.COOKIES:
