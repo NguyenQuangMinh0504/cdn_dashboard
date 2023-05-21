@@ -1,0 +1,9 @@
+---
+- hosts: cdn-dashboard
+  become: yes
+  name: Running process
+  tasks:
+    - name: Run openresty proxy server
+      ansible.builtin.command: 
+        chdir: /home/nguyenquangminh/cdn_dashboard/
+        cmd: openresty -c nginx.conf -p /home/nguyenquangminh/cdn_dashboard/
