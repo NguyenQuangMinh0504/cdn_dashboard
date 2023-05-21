@@ -14,9 +14,10 @@
 
   <div class="container">
     <h1>Conditions</h1>
-    <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="selectBox">
+    <h2>If</h2>
+    <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="condition">
         <option selected>Open this select menu</option>
-        <option value="1">One</option>
+        <option value="1">Path</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
     </select>
@@ -33,17 +34,26 @@
 </html>
 
 <script>
-    const selectBox = document.getElementById("selectBox")
+    const carModels = {
+    Path: ['Corolla', 'Camry', 'Highlander'],
+    Honda: ['Civic', 'Accord', 'CR-V'],
+    Ford: ['Mustang', 'F-150', 'Explorer'],
+  };
+    const selectBox = document.getElementById("condition")
     const contentDiv = document.getElementById("content")
     selectBox.addEventListener("change", () => {
         const selectedValue = selectBox.value;
-        if (selectedValue === '1') {
+        if (selectedValue === 'Path') {
             // Add a new element to the content div
             const newParagraph = document.createElement('p');
             newParagraph.textContent = 'Some more content here';
             const newSelectBox = document.createElement("select")
             const carModelWrapper = document.getElementById('car-model-wrapper');
             carModelWrapper.style.display = "block";
+            const models = carModels[selectedMake];
+            models.forEach((model) => {
+            carModelSelect.innerHTML += `<option value="${model}">${model}</option>`;
+  });
             contentDiv.appendChild(newParagraph);
         } else if (selectedValue === '2') {
             // Remove the second paragraph from the content div
