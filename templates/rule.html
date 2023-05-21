@@ -22,6 +22,12 @@
     </select>
     <div id="content">
     </div>
+    <div class="form-group" id="car-model-wrapper" style="display: none;">
+      <label for="car-model">Car Model</label>
+      <select class="form-control" id="car-model">
+        <option value="">Select a model</option>
+      </select>
+    </div>
   </div>
 </body>
 </html>
@@ -35,6 +41,8 @@
             // Add a new element to the content div
             const newParagraph = document.createElement('p');
             newParagraph.textContent = 'Some more content here';
+            const newSelectBox = document.createElement("select")
+            newSelectBox.options
             contentDiv.appendChild(newParagraph);
         } else if (selectedValue === '2') {
             // Remove the second paragraph from the content div
