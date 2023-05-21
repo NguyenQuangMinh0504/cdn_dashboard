@@ -45,9 +45,6 @@
         const selectedValue = selectBox.value;
         if (selectedValue === 'Path') {
             // Add a new element to the content div
-            const newParagraph = document.createElement('p');
-            newParagraph.textContent = 'Some more content here';
-            const newSelectBox = document.createElement("select")
             const carModelWrapper = document.getElementById('car-model-wrapper');
             carModelWrapper.style.display = "block";
             const models = carModels[selectedValue];
