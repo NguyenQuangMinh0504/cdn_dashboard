@@ -50,7 +50,7 @@
             const newSelectBox = document.createElement("select")
             const carModelWrapper = document.getElementById('car-model-wrapper');
             carModelWrapper.style.display = "block";
-            const models = carModels[selectedMake];
+            const models = carModels[selectedValue];
             models.forEach((model) => {
             carModelSelect.innerHTML += `<option value="${model}">${model}</option>`;
   });
