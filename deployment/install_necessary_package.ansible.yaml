@@ -26,17 +26,19 @@
       ansible.builtin.apt:
         name:
           - openresty
-
-
-    - name: Clone github repository
-      ansible.builtin.git:
-        repo: https://NguyenQuangMinh0504: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@github.com/NguyenQuangMinh0504/cdn_dashboard.git
-        dest: /home/nguyenquangminh/cdn_dashboard/
-        update: yes
-        clone: yes
-        force: yes
-
-    - name: Run openresty server
-      ansible.builtin.command: 
-        chdir: /home/nguyenquangminh/cdn_dashboard/
-        cmd: openresty -c nginx.conf -p /home/nguyenquangminh/cdn_dashboard/
+    
+    - name: Add mongodb key
+      ansible.builtin.apt_key:
+        url: https://pgp.mongodb.com/server-6.0.asc
+    - name: Add mongodb repository
+      ansible.builtin.apt_repository:
+        repo: deb http://repo.mongodb.org/apt/debian bullseye/mongodb-org/6.0 main
+    - name: Install mongodb community edition
+      ansible.builtin.apt:
+        name:
+          - mongodb-org
+    
+    - name: Install redis server
+      ansible.builtin.apt:
+        name:
+          - redis-server
