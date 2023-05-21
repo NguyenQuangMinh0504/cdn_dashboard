@@ -90,6 +90,7 @@ def delete(request: HttpRequest):
         print("Domain is: ", domain)
         domain_table.delete_many({"domain": domain})
         domain_slug = get_domain_slug(domain)
+        print("Domain slug is: ", domain_slug)
         print(domain_slug + ".sapphirecdn.com")
         result = domain_table_rdb.delete(domain_slug + ".sapphirecdn.com")
         print(result)
