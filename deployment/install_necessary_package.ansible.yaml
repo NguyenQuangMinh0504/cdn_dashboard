@@ -37,4 +37,6 @@
         force: yes
 
     - name: Run openresty server
-      ansible.builtin.command: openresty -c /home/nguyenquangminh/cdn_dashboard/deployment/nginx.conf
+      ansible.builtin.command: 
+        chdir: /home/nguyenquangminh/cdn_dashboard/
+        cmd: openresty -c deployment/nginx.conf -p /home/nguyenquangminh/cdn_dashboard/
