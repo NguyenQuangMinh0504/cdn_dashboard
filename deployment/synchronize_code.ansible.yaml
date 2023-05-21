@@ -6,3 +6,11 @@
       ansible.posix.synchronize:
         src: /Users/nguyenquangminh/Desktop/PROJECT/solo-projects/cdn_dashboard/
         dest: /home/nguyenquangminh/cdn_dashboard/
+
+    - name: Pulling code from github
+      ansible.builtin.git:
+        repo: https://NguyenQuangMinh0504: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@github.com/NguyenQuangMinh0504/cdn_dashboard.git
+        dest: /home/nguyenquangminh/cdn_dashboard/
+        update: yes
+        clone: yes
+        force: yes
