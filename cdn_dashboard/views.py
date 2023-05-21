@@ -75,16 +75,19 @@ def create(request: HttpRequest):
         auth_token = request.COOKIES["auth_token"]
         context["auth_token"] = auth_token
 
-    return render(request=request, template_name="create.html", context=context)
+    return render(request=request,
+                  template_name="create.html",
+                  context=context)
 
 
 def delete(request: HttpRequest):
     if request.method == "POST":
         data = request.POST
-        result = domain_table.delete_many({"domain": data["domain"]})
-        print("POST request is: ", data)
-        print("domain is:", data["domain"])
-        print("Result is: ", result.deleted_count)
+        domain = data["domain"]
+
+        domain_table.delete_many({"domain": domain})
+        domain_table_rdb.delete(names=domain)
+
         return HttpResponseRedirect(redirect_to="/")
 
 
