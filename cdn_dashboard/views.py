@@ -69,12 +69,12 @@ def create(request: HttpRequest):
             {"auth_token": request.COOKIES["auth_token"],
              "domain": domain}
             )
-        
+
         domain_slug = get_domain_slug(domain)
 
         domain_table_rdb.set(name=domain_slug + ".sapphirecdn.com",
                              value=domain)
-        
+
         return HttpResponseRedirect(redirect_to="/")
 
     if "auth_token" in request.COOKIES:
@@ -104,3 +104,7 @@ def rule(request: HttpRequest):
         context["auth_token"] = auth_token
 
     return render(request=request, template_name="rule.html", context=context)
+
+
+def test(request: HttpRequest):
+    return render(request=request, template_name="test.html", context={})
