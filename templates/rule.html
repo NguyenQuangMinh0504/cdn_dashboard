@@ -72,7 +72,8 @@
         const selectedValue = selectBox.value;
         if (selectedValue === 'Path') {
             // Add a new element to the content div
-
+            const compareValue = document.getElementById("compare-value")
+            compareValue.parentElement.removeChild(compareValue)
             conditionWrapper.style.display = "block";
             const models = carModels[selectedValue];
             compareMethod.innerHTML = ""
@@ -82,11 +83,13 @@
             // Tạo input
             var inputPath = document.createElement("input")
             inputPath.setAttribute("class", "form-control")
+            inputPath.setAttribute("id", "compare-value")
             conditionWrapper.appendChild(inputPath)
   });
             contentDiv.appendChild(newParagraph);
         } else if (selectedValue === 'request-method') {
             var requestMethodSelect = document.createElement("select")
+            requestMethodSelect.setAttribute("id", "compare-value")
             requestMethodSelect.setAttribute("class", "form-select")
             var postMethod = document.createElement("option")
             var getMethod = document.createElement("option")
