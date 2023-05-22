@@ -61,6 +61,7 @@
     const actionBox = document.getElementById("action")
     const ruleForm = document.getElementById("rule-form")
     const conditionWrapper = document.getElementById('condition-wrapper')
+    const actionWrapper = document.getElementById("action-wrapper")
 
 
 
@@ -106,23 +107,35 @@
             requestMethodSelect.appendChild(getMethod)
             requestMethodSelect.appendChild(postMethod)
             conditionWrapper.appendChild(requestMethodSelect)
-
-            // Remove the second paragraph from the content div
-
-            const paragraphs = contentDiv.getElementsByTagName('p');
-            if (paragraphs.length >= 2) {
-            contentDiv.removeChild(paragraphs[1]);
             }
       }
     })
 
 
 
-    const actionWrapper = document.getElementById("action-wrapper")
+
 
     actionBox.addEventListener("change", () => {
       const actionValue = actionBox.value
       if (actionValue === "rewrite-url") {
+
+        // Tạo source pattern input
+        var sourcePatternInput = document.createElement("input")
+        sourcePatternInput.setAttribute("type", "text")
+        sourcePatternInput.setAttribute("placeholder", "Source pattern")
+        sourcePatternInput.setAttribute("name", "source-pattern")
+        sourcePatternInput.classList.add("form-control")
+        actionWrapper.appendChild(sourcePatternInput)
+
+        // Tạo destination input
+        var destinationInput = document.createElement("input")
+        destinationInput.setAttribute("type", "text")
+        destinationInput.setAttribute("placeholder", "Destination")
+        destinationInput.setAttribute("name", "destination")
+        destinationInput.classList.add("form-control")
+        actionWrapper.append(destinationInput)
+
+
         actionWrapper.style.display = "block";
       }
       else if (actionValue === "ignore-query-string") {
