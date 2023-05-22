@@ -21,7 +21,6 @@
           <option value="Condition">Condition</option>
           <option value="Path">Path</option>
           <option value="request-method">Request method</option>
-          <option value="3">Three</option>
       </select>
       <div id="content">
       </div>
@@ -32,7 +31,6 @@
           <option value="not-equal">Not Equal</option>
         </select>
         <br>
-        <!-- <input type="text" class="form-control"> -->
       </div>
       <h2>Then</h2>
       <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="action" name="action">
@@ -56,11 +54,6 @@
 </html>
 
 <script>
-    const carModels = {
-    Path: ['Equal', 'Not Equal'],
-    Honda: ['Civic', 'Accord', 'CR-V'],
-    Ford: ['Mustang', 'F-150', 'Explorer'],
-  };
 
     const selectBox = document.getElementById("condition")
     const contentDiv = document.getElementById("content")
@@ -97,6 +90,7 @@
 
             conditionWrapper.style.display = "block";
         } 
+
         else if (selectedValue === 'request-method') {
 
             const compareValue = document.getElementsByClassName("compare-value")
@@ -128,14 +122,7 @@
             if (paragraphs.length >= 2) {
             contentDiv.removeChild(paragraphs[1]);
             }
-        } else if (selectedValue === '3') {
-            // Remove all paragraphs from the content div
-            const paragraphs = contentDiv.getElementsByTagName('p');
-            while (paragraphs.length > 0) {
-            contentDiv.removeChild(paragraphs[0]);
-            }
-            conditionWrapper.style.display = "none";
-        }
+      }
     })
 
 
