@@ -73,6 +73,7 @@
         if (selectedValue === 'Path') {
             // Add a new element to the content div
             const compareValue = document.getElementById("compare-value")
+            console.log(compareValue)
             compareValue.parentElement.removeChild(compareValue)
             conditionWrapper.style.display = "block";
             const models = carModels[selectedValue];
