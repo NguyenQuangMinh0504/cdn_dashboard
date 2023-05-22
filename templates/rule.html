@@ -33,8 +33,12 @@
     <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="action">
       <option value="ignore-query-string">Ignore query string</option>
       <option value="rewrite-url">Rewrite URL</option>
-
     </select>
+    <div class="form-group" id="action-wrapper" style="display: none;">
+      <input type="text" class="form-control" placeholder="Source pattern">
+      <input type="text" class="form-control" placeholder="Destination">
+    </div>
+
   </div>
 </body>
 </html>
@@ -48,6 +52,9 @@
     const selectBox = document.getElementById("condition")
     const contentDiv = document.getElementById("content")
     const compareMethod = document.getElementById("compare-method")
+    const actionBox = document.getElementById("action")
+
+
     selectBox.addEventListener("change", () => {
         const selectedValue = selectBox.value;
         if (selectedValue === 'Path') {
@@ -75,5 +82,13 @@
             const carModelWrapper = document.getElementById('car-model-wrapper');
             carModelWrapper.style.display = "none";
         }
+    })
+
+    actionBox.addEventListener("change", () => {
+      const actionValue = actionBox.value
+      if (actionValue === "Rewrite URL") {
+        const actionWarpper = document.getElementById("action-wrapper")
+        actionWarpper.style.display = "block";
+      }
     })
 </script>
