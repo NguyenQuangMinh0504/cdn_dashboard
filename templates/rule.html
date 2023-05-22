@@ -58,6 +58,7 @@
     Honda: ['Civic', 'Accord', 'CR-V'],
     Ford: ['Mustang', 'F-150', 'Explorer'],
   };
+
     const selectBox = document.getElementById("condition")
     const contentDiv = document.getElementById("content")
     const compareMethod = document.getElementById("compare-method")
@@ -81,9 +82,13 @@
             contentDiv.appendChild(newParagraph);
         } else if (selectedValue === 'request-method') {
             var requestMethodSelect = document.createElement("select")
+            requestMethodSelect.setAttribute("class", "form-select")
+            var postMethod = document.createElement("option")
             var getMethod = document.createElement("option")
             getMethod.setAttribute("value", "get")
+            postMethod.setAttribute("value", "post")
             getMethod.innerText = "GET"
+            postMethod.innerText = "POST"
             requestMethodSelect.appendChild(getMethod)
             conditionWrapper.appendChild(requestMethodSelect)
 
