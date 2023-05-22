@@ -115,6 +115,10 @@
       const actionValue = actionBox.value
       if (actionValue === "rewrite-url") {
 
+        // Xoá hết các element bên trong của action wrapper trước
+        actionWrapper.innerHTML = ""
+
+
         // Tạo source pattern input
         var sourcePatternInput = document.createElement("input")
         sourcePatternInput.setAttribute("type", "text")
@@ -122,6 +126,7 @@
         sourcePatternInput.setAttribute("name", "source-pattern")
         sourcePatternInput.classList.add("form-control")
         actionWrapper.appendChild(sourcePatternInput)
+        actionWrapper.appendChild(document.createElement("br"))
 
         // Tạo destination input
         var destinationInput = document.createElement("input")
@@ -130,6 +135,7 @@
         destinationInput.setAttribute("name", "destination")
         destinationInput.classList.add("form-control")
         actionWrapper.append(destinationInput)
+        actionWrapper.appendChild(document.createElement("br"))
 
 
         actionWrapper.style.display = "block";
