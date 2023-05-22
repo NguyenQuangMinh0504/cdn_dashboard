@@ -102,6 +102,18 @@
             conditionWrapper.appendChild(inputPath)
   });
         } else if (selectedValue === 'request-method') {
+
+            const compareValue = document.getElementsByClassName("compare-value")
+            console.log(compareValue)
+            for (var i = 0; i < compareValue.length; i++) {
+              var element = compareValue[i]
+              element.parentElement.removeChild(element)
+            }
+            // compareValue.parentElement.removeChild(compareValue)
+            
+            console.log("After removing class compare value")
+            console.log(document.getElementsByClassName("compare-value"))
+
             var requestMethodSelect = document.createElement("select")
             requestMethodSelect.classList.add("compare-value")
             requestMethodSelect.classList.add("form-select")
