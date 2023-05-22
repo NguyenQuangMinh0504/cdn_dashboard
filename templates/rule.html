@@ -18,15 +18,15 @@
       <h1>Conditions</h1>
       <h2>If</h2>
       <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="condition" name="condition">
-          <option value="Condition">Condition</option>
-          <option value="Path">Path</option>
+          <option value="condition">Condition</option>
+          <option value="path">Path</option>
           <option value="request-method">Request method</option>
       </select>
       <div id="content">
       </div>
       <br>
       <div class="form-group" id="condition-wrapper" style="display: none;">
-        <select class="form-control" id="compare-method">
+        <select class="form-control" id="compare-method" name="compare-method">
           <option value="equal">Equal</option>
           <option value="not-equal">Not Equal</option>
         </select>
@@ -66,7 +66,7 @@
 
     selectBox.addEventListener("change", () => {
         const selectedValue = selectBox.value;
-        if (selectedValue === 'Path') {
+        if (selectedValue === 'path') {
             // Remove old compare value
             const compareValue = document.getElementsByClassName("compare-value")
 
@@ -79,6 +79,7 @@
             var inputPath = document.createElement("input")
             inputPath.classList.add("form-control")
             inputPath.classList.add("compare-value")
+            inputPath.setAttribute("name", "compare-value")
             conditionWrapper.appendChild(inputPath)
 
             conditionWrapper.style.display = "block";
