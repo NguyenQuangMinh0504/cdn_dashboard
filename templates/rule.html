@@ -25,7 +25,7 @@
       <div id="content">
       </div>
       <br>
-      <div class="form-group" id="car-model-wrapper" style="display: none;">
+      <div class="form-group" id="condition-wrapper" style="display: none;">
         <select class="form-control" id="compare-method">
         </select>
         <br>
@@ -63,7 +63,7 @@
     const compareMethod = document.getElementById("compare-method")
     const actionBox = document.getElementById("action")
     const ruleForm = document.getElementById("rule-form")
-    const carModelWrapper = document.getElementById('car-model-wrapper')
+    const conditionWrapper = document.getElementById('condition-wrapper')
 
 
 
@@ -72,7 +72,7 @@
         if (selectedValue === 'Path') {
             // Add a new element to the content div
 
-            carModelWrapper.style.display = "block";
+            conditionWrapper.style.display = "block";
             const models = carModels[selectedValue];
             compareMethod.innerHTML = ""
             models.forEach((model) => {
@@ -85,7 +85,7 @@
             getMethod.setAttribute("value", "get")
             getMethod.innerText = "GET"
             requestMethodSelect.appendChild(getMethod)
-            carModelWrapper.appendChild(requestMethodSelect)
+            conditionWrapper.appendChild(requestMethodSelect)
 
             // Remove the second paragraph from the content div
 
@@ -99,8 +99,7 @@
             while (paragraphs.length > 0) {
             contentDiv.removeChild(paragraphs[0]);
             }
-            const carModelWrapper = document.getElementById('car-model-wrapper');
-            carModelWrapper.style.display = "none";
+            conditionWrapper.style.display = "none";
         }
     })
 
