@@ -1,16 +1,48 @@
-<form action="/test/" method="post">
-  {% csrf_token %}
-  <div class="form-group">
-    <label for="exampleSelect">Select Example</label>
-    <select class="form-control" id="exampleSelect" name="something">
-      <option value="option1">Option 1</option>
-      <option value="option2">Option 2</option>
-      <option value="option3">Option 3</option>
+<div class="form-group">
+    <label for="car-make">Car Make</label>
+    <select class="form-control" id="car-make" onchange="updateCarModelSelect()">
+      <option value="">Select a make</option>
+      <option value="Toyota">Toyota</option>
+      <option value="Honda">Honda</option>
+      <option value="Ford">Ford</option>
     </select>
   </div>
-  <div class="form-group">
-    <label for="exampleText">Text Example</label>
-    <input type="text" class="form-control" id="exampleText" name="foo">
+  
+  <div class="form-group" id="car-model-wrapper" style="display: none;">
+    <label for="car-model">Car Model</label>
+    <select class="form-control" id="car-model">
+      <option value="">Select a model</option>
+    </select>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+  <script>
+    const carMakeSelect = document.getElementById('car-make');
+const carModelWrapper = document.getElementById('car-model-wrapper');
+const carModelSelect = document.getElementById('car-model');
+
+const carModels = {
+  Toyota: ['Corolla', 'Camry', 'Highlander'],
+  Honda: ['Civic', 'Accord', 'CR-V'],
+  Ford: ['Mustang', 'F-150', 'Explorer'],
+};
+
+function updateCarModelSelect() {
+  const selectedMake = carMakeSelect.value;
+  
+  if (selectedMake === '') {
+    carModelSelect.innerHTML = '<option value="">Select a make first</option>';
+    
+    carModelWrapper.style.display = 'none';
+    return;
+  }
+  
+  carModelSelect.innerHTML = '';
+  
+  const models = carModels[selectedMake];
+  models.forEach((model) => {
+    carModelSelect.innerHTML += `<option value="${model}">${model}</option>`;
+  });
+  
+  carModelWrapper.style.display = 'block';
+}
+  </script>

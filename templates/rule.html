@@ -13,7 +13,7 @@
   <br>
 
   <div class="container">
-    <form action="/rule/" method="post">
+    <form action="/rule/" method="post" id="rule-form">
       {% csrf_token %}
       <h1>Conditions</h1>
       <h2>If</h2>
@@ -62,13 +62,16 @@
     const contentDiv = document.getElementById("content")
     const compareMethod = document.getElementById("compare-method")
     const actionBox = document.getElementById("action")
+    const ruleForm = document.getElementById("rule-form")
+    const carModelWrapper = document.getElementById('car-model-wrapper')
+
 
 
     selectBox.addEventListener("change", () => {
         const selectedValue = selectBox.value;
         if (selectedValue === 'Path') {
             // Add a new element to the content div
-            const carModelWrapper = document.getElementById('car-model-wrapper');
+
             carModelWrapper.style.display = "block";
             const models = carModels[selectedValue];
             compareMethod.innerHTML = ""
@@ -76,8 +79,16 @@
             compareMethod.innerHTML += `<option value="${model}">${model}</option>`;
   });
             contentDiv.appendChild(newParagraph);
-        } else if (selectedValue === '2') {
+        } else if (selectedValue === 'request-method') {
+            var requestMethodSelect = document.createElement("select")
+            var getMethod = document.createElement("option")
+            getMethod.setAttribute("value", "get")
+            getMethod.innerText = "GET"
+            requestMethodSelect.appendChild(getMethod)
+            carModelWrapper.appendChild(requestMethodSelect)
+
             // Remove the second paragraph from the content div
+
             const paragraphs = contentDiv.getElementsByTagName('p');
             if (paragraphs.length >= 2) {
             contentDiv.removeChild(paragraphs[1]);
