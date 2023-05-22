@@ -37,11 +37,7 @@
         <option value="ignore-query-string">Ignore query string</option>
         <option value="rewrite-url">Rewrite URL</option>
       </select>
-      <div class="form-group" id="action-wrapper" style="display: none;">
-        <!-- <br>
-        <input type="text" class="form-control" placeholder="Source pattern" name="source-pattern">
-        <br>
-        <input type="text" class="form-control" placeholder="Destination" name="destination"> -->
+      <div class="form-group" id="action-wrapper" style="display: block;">
       </div>
       <br>
       <div class="text-end">
@@ -118,7 +114,7 @@
         // Xoá hết các element bên trong của action wrapper trước
         actionWrapper.innerHTML = ""
         actionWrapper.appendChild(document.createElement("br"))
-        
+
         // Tạo source pattern input
         var sourcePatternInput = document.createElement("input")
         sourcePatternInput.setAttribute("type", "text")
@@ -141,7 +137,8 @@
         actionWrapper.style.display = "block";
       }
       else if (actionValue === "ignore-query-string") {
-        actionWrapper.style.display = "none";
+        actionWrapper.innerHTML = ""
+        actionWrapper.appendChild(document.createElement("br"))
       }
     })
 </script>
