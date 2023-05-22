@@ -86,11 +86,17 @@
         }
     })
 
+
+
+    const actionWrapper = document.getElementById("action-wrapper")
+
     actionBox.addEventListener("change", () => {
       const actionValue = actionBox.value
       if (actionValue === "rewrite-url") {
-        const actionWarpper = document.getElementById("action-wrapper")
-        actionWarpper.style.display = "block";
+        actionWrapper.style.display = "block";
+      }
+      else if (actionValue === "ignore-query-string") {
+        actionWrapper.style.display = "none";
       }
     })
 </script>
