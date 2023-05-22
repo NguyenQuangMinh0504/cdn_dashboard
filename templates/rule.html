@@ -77,7 +77,7 @@
 
             const compareValue = document.getElementsByClassName("compare-value")
             console.log(compareValue)
-            for (var i = 0; i < compareValue.length; i ++) {
+            for (var i = 0; i < compareValue.length; i++) {
               var element = compareValue[i]
               element.parentElement.removeChild(element)
             }
@@ -100,7 +100,7 @@
   });
         } else if (selectedValue === 'request-method') {
             var requestMethodSelect = document.createElement("select")
-            requestMethodSelect.setAttribute("id", "compare-value")
+            requestMethodSelect.setAttribute("class", "compare-value")
             requestMethodSelect.setAttribute("class", "form-select")
             var postMethod = document.createElement("option")
             var getMethod = document.createElement("option")
