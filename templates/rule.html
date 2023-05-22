@@ -13,37 +13,39 @@
   <br>
 
   <div class="container">
-    <h1>Conditions</h1>
-    <h2>If</h2>
-    <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="condition">
-        <option value="Path">Path</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-    <div id="content">
-    </div>
-    <br>
-    <div class="form-group" id="car-model-wrapper" style="display: none;">
-      <select class="form-control" id="compare-method">
+    <form action="/rule/" method="post">
+      <h1>Conditions</h1>
+      <h2>If</h2>
+      <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="condition">
+          <option value="Path">Path</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
       </select>
+      <div id="content">
+      </div>
       <br>
-      <input type="text" class="form-control">
-    </div>
-    <h2>Then</h2>
-    <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="action">
-      <option value="ignore-query-string">Ignore query string</option>
-      <option value="rewrite-url">Rewrite URL</option>
-    </select>
-    <div class="form-group" id="action-wrapper" style="display: none;">
+      <div class="form-group" id="car-model-wrapper" style="display: none;">
+        <select class="form-control" id="compare-method">
+        </select>
+        <br>
+        <input type="text" class="form-control">
+      </div>
+      <h2>Then</h2>
+      <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="action" name="action">
+        <option value="ignore-query-string">Ignore query string</option>
+        <option value="rewrite-url">Rewrite URL</option>
+      </select>
+      <div class="form-group" id="action-wrapper" style="display: none;">
+        <br>
+        <input type="text" class="form-control" placeholder="Source pattern">
+        <br>
+        <input type="text" class="form-control" placeholder="Destination">
+      </div>
       <br>
-      <input type="text" class="form-control" placeholder="Source pattern">
-      <br>
-      <input type="text" class="form-control" placeholder="Destination">
-    </div>
-    <br>
-    <div class="text-end">
-      <button type="submit" class="btn btn-primary">Tạo rule</button>
-    </div>
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary">Tạo rule</button>
+      </div>
+    </form>
 
   </div>
 </body>
