@@ -77,6 +77,10 @@
 
             const compareValue = document.getElementsByClassName("compare-value")
             console.log(compareValue)
+            for (var i = 0; i < compareValue.length; i ++) {
+              var element = compareValue[i]
+              element.parentElement.removeChild(element)
+            }
             // compareValue.parentElement.removeChild(compareValue)
 
 
