@@ -29,7 +29,7 @@
         <select class="form-control" id="compare-method">
         </select>
         <br>
-        <input type="text" class="form-control">
+        <!-- <input type="text" class="form-control"> -->
       </div>
       <h2>Then</h2>
       <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="action" name="action">
@@ -78,6 +78,11 @@
             compareMethod.innerHTML = ""
             models.forEach((model) => {
             compareMethod.innerHTML += `<option value="${model}">${model}</option>`;
+
+            // Tạo input
+            var inputPath = document.createElement("input")
+            inputPath.setAttribute("class", "form-control")
+            conditionWrapper.appendChild(inputPath)
   });
             contentDiv.appendChild(newParagraph);
         } else if (selectedValue === 'request-method') {
