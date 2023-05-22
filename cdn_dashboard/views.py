@@ -28,7 +28,6 @@ def index(request: HttpRequest):
             context['domains'] = []
             for domain in domain_table.find({"auth_token": auth_token}):
                 context['domains'].append(domain)
-            print(context["domains"])
 
     return render(request=request,
                   template_name="index.html",
