@@ -117,8 +117,8 @@
 
         // Xoá hết các element bên trong của action wrapper trước
         actionWrapper.innerHTML = ""
-
-
+        actionWrapper.appendChild(document.createElement("br"))
+        
         // Tạo source pattern input
         var sourcePatternInput = document.createElement("input")
         sourcePatternInput.setAttribute("type", "text")
