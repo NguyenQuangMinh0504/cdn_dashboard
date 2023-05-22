@@ -87,22 +87,20 @@
             console.log("After removing class compare value")
             console.log(document.getElementsByClassName("compare-value"))
 
+            // Tạo input
+            var inputPath = document.createElement("input")
+            inputPath.classList.add("form-control")
+            inputPath.classList.add("compare-value")
+            conditionWrapper.appendChild(inputPath)
+
 
 
 
             conditionWrapper.style.display = "block";
             const models = carModels[selectedValue];
             compareMethod.innerHTML = ""
-            models.forEach((model) => {
-            compareMethod.innerHTML += `<option value="${model}">${model}</option>`;
-
-            // Tạo input
-            var inputPath = document.createElement("input")
-            inputPath.classList.add("form-control")
-            inputPath.classList.add("compare-value")
-            conditionWrapper.appendChild(inputPath)
-  });
-        } else if (selectedValue === 'request-method') {
+        } 
+        else if (selectedValue === 'request-method') {
 
             const compareValue = document.getElementsByClassName("compare-value")
             console.log(compareValue)
