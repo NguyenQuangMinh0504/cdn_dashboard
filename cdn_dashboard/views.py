@@ -107,6 +107,10 @@ def rule(request: HttpRequest):
     return render(request=request, template_name="rule.html", context=context)
 
 
+def setting(request: HttpRequest):
+    return render(request=request, template_name="setting.html", context={})
+
+
 def test(request: HttpRequest):
     if request.method == "POST":
         print(request.POST)
