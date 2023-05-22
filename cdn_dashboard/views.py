@@ -108,7 +108,15 @@ def rule(request: HttpRequest):
 
 
 def setting(request: HttpRequest):
-    return render(request=request, template_name="setting.html", context={})
+    context = {}
+    if request.method == "POST":
+        print(request.POST)
+    if "auth_token" in request.COOKIES:
+        auth_token = request.COOKIES["auth_token"]
+        context["auth_token"] = auth_token
+    return render(request=request,
+                  template_name="setting.html",
+                  context=context)
 
 
 def test(request: HttpRequest):
