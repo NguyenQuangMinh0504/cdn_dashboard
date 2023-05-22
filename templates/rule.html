@@ -67,20 +67,13 @@
     selectBox.addEventListener("change", () => {
         const selectedValue = selectBox.value;
         if (selectedValue === 'Path') {
-            // Add a new element to the content div
-
             // Remove old compare value
-
             const compareValue = document.getElementsByClassName("compare-value")
-            console.log(compareValue)
+
             for (var i = 0; i < compareValue.length; i++) {
               var element = compareValue[i]
               element.parentElement.removeChild(element)
             }
-            // compareValue.parentElement.removeChild(compareValue)
-            
-            console.log("After removing class compare value")
-            console.log(document.getElementsByClassName("compare-value"))
 
             // Tạo input
             var inputPath = document.createElement("input")
@@ -94,16 +87,12 @@
         else if (selectedValue === 'request-method') {
 
             const compareValue = document.getElementsByClassName("compare-value")
-            console.log(compareValue)
+
             for (var i = 0; i < compareValue.length; i++) {
               var element = compareValue[i]
               element.parentElement.removeChild(element)
             }
-            // compareValue.parentElement.removeChild(compareValue)
             
-            console.log("After removing class compare value")
-            console.log(document.getElementsByClassName("compare-value"))
-
             var requestMethodSelect = document.createElement("select")
             requestMethodSelect.classList.add("compare-value")
             requestMethodSelect.classList.add("form-select")
