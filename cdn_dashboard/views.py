@@ -1,6 +1,7 @@
 from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
 import secrets
+import redis
 from .db import domain_table, domain_table_rdb, user_table
 from cdn_dashboard.utils import get_domain_slug
 
@@ -99,6 +100,9 @@ def delete(request: HttpRequest):
 def rule(request: HttpRequest):
     if request.method == "POST":
         print(request.POST)
+        domain_rule = redis.Redis(host="10.5.20.169", port=6378, db=4)
+        print(domain_rule.get("saugau.com"))
+
     context = {}
     if "auth_token" in request.COOKIES:
         auth_token = request.COOKIES["auth_token"]
