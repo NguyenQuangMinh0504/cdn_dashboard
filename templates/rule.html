@@ -103,8 +103,8 @@
   });
         } else if (selectedValue === 'request-method') {
             var requestMethodSelect = document.createElement("select")
-            requestMethodSelect.setAttribute("class", "compare-value")
-            requestMethodSelect.setAttribute("class", "form-select")
+            requestMethodSelect.classList.add("compare-value")
+            requestMethodSelect.classList.add("form-select")
             var postMethod = document.createElement("option")
             var getMethod = document.createElement("option")
             getMethod.setAttribute("value", "get")
