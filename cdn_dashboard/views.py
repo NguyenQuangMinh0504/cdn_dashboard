@@ -104,14 +104,16 @@ def rule(request: HttpRequest):
         print(request.POST)
         data = request.POST
         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-        domain_rule = json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8"))
+        domain_rule = json.loads(
+            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
+            )
         if data["action"] == "ignore-query-string":
             domain_rule["rule:1"]["actions"] = [["ignore_query_string",
                                                  "",
                                                  ""]]
 
         elif data["action"] == "rewrite-url":
-            domain_rule["rule:1"]["actions"] = [["rewrite-url",
+            domain_rule["rule:1"]["actions"] = [["url_rewrite",
                                                  data["source-pattern"],
                                                  data["destination"]]]
 
