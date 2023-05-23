@@ -2,6 +2,8 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
 import secrets
 import redis
+import json
+
 from .db import domain_table, domain_table_rdb, user_table
 from cdn_dashboard.utils import get_domain_slug
 
@@ -120,7 +122,7 @@ def setting(request: HttpRequest):
         else: 
             print("no")
     rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-    domain_rule = rule_table.get("saugau.com")
+    domain_rule = json.loads(rule_table.get("saugau.com").decode("utf-8"))
     print(domain_rule)
 
     if "auth_token" in request.COOKIES:
