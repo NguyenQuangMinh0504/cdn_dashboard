@@ -104,7 +104,7 @@ def rule(request: HttpRequest):
         print(request.POST)
         data = request.POST
         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-        domain_rule = json.loads(rule_table.get("saugau.com").decode("utf-8"))
+        domain_rule = json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8"))
         if data["action"] == "ignore-query-string":
             domain_rule["rule:1"]["actions"] = [["ignore-query-string",
                                                  "",
@@ -115,8 +115,8 @@ def rule(request: HttpRequest):
                                                  data["source-pattern"],
                                                  data["destination"]]]
 
-        rule_table.set("saugau.com", json.dumps(domain_rule))
-        print(json.loads(rule_table.get("saugau.com").decode("utf-8")))
+        rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
+        print(json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")))
 
     context = {}
     if "auth_token" in request.COOKIES:
@@ -131,14 +131,14 @@ def setting(request: HttpRequest):
     if request.method == "POST":
 
         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-        domain_rule = json.loads(rule_table.get("saugau.com").decode("utf-8"))
+        domain_rule = json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8"))
         print(request.POST)
         if "querystring-cache-key" in request.POST:
             domain_rule["cache_key"] = 5
         else:
             domain_rule["cache_key"] = 4
-        rule_table.set("saugau.com", json.dumps(domain_rule))
-        print(json.loads(rule_table.get("saugau.com").decode("utf-8")))
+        rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
+        print(json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")))
 
     if "auth_token" in request.COOKIES:
         auth_token = request.COOKIES["auth_token"]
