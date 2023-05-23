@@ -102,7 +102,9 @@ def delete(request: HttpRequest):
 def rule(request: HttpRequest):
     if request.method == "POST":
         print(request.POST)
-        domain_rule = redis.Redis(host="10.5.20.169", port=6378, db=4)
+        rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
+        domain_rule = json.loads(rule_table.get("saugau.com").decode("utf-8"))
+        print(request.POST["action"])
         print(domain_rule.get("saugau.com"))
 
     context = {}
