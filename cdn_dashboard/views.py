@@ -115,6 +115,10 @@ def setting(request: HttpRequest):
     context = {}
     if request.method == "POST":
         print(request.POST)
+    rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
+    domain_rule = rule_table.get("saugau.com")
+    print(domain_rule)
+
     if "auth_token" in request.COOKIES:
         auth_token = request.COOKIES["auth_token"]
         context["auth_token"] = auth_token
