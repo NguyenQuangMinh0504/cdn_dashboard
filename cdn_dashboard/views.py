@@ -115,6 +115,10 @@ def setting(request: HttpRequest):
     context = {}
     if request.method == "POST":
         print(request.POST)
+        if "querystring-cache-key" in request.POST:
+            print("yes")
+        else: 
+            print("no")
     rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
     domain_rule = rule_table.get("saugau.com")
     print(domain_rule)
