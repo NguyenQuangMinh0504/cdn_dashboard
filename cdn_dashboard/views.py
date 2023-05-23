@@ -116,6 +116,7 @@ def rule(request: HttpRequest):
                                                  data["destination"]]]
 
         rule_table.set("saugau.com", json.dumps(domain_rule))
+        print(json.loads(rule_table.get("saugau.com").decode("utf-8")))
 
     context = {}
     if "auth_token" in request.COOKIES:
