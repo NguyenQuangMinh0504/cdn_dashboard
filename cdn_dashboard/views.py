@@ -102,11 +102,20 @@ def delete(request: HttpRequest):
 def rule(request: HttpRequest):
     if request.method == "POST":
         print(request.POST)
+        data = request.POST
         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
         domain_rule = json.loads(rule_table.get("saugau.com").decode("utf-8"))
-        print(request.POST["action"])
-        print(domain_rule["rule:1"])
-        print(domain_rule)
+        if data["action"] == "ignore-query-string":
+            domain_rule["rule:1"]["actions"] = [["ignore-query-string",
+                                                 "",
+                                                 ""]]
+
+        elif data["action"] == "rewrite-url":
+            domain_rule["rule:1"]["actions"] = [["rewrite-url",
+                                                 data["source-pattern"],
+                                                 data["destination"]]]
+
+        rule_table.set("saugau.com", json.dumps(domain_rule))
 
     context = {}
     if "auth_token" in request.COOKIES:
