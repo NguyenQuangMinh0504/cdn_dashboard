@@ -105,7 +105,7 @@ def rule(request: HttpRequest):
         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
         domain_rule = json.loads(rule_table.get("saugau.com").decode("utf-8"))
         print(request.POST["action"])
-        print(domain_rule.get("saugau.com"))
+        print(domain_rule)
 
     context = {}
     if "auth_token" in request.COOKIES:
