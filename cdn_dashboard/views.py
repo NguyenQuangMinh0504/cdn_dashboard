@@ -116,13 +116,16 @@ def rule(request: HttpRequest):
 def setting(request: HttpRequest):
     context = {}
     if request.method == "POST":
+
+        rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
+        domain_rule = json.loads(rule_table.get("saugau.com").decode("utf-8"))
         print(request.POST)
         if "querystring-cache-key" in request.POST:
-            print("yes")
-        else: 
-            print("no")
-    rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-    domain_rule = json.loads(rule_table.get("saugau.com").decode("utf-8"))
+            domain_rule["cache_key"] = 5
+        else:
+            domain_rule["cache_key"] = 4
+        rule_table.set("saugau.com", json.dumps(domain_rule))
+
     print(domain_rule)
 
     if "auth_token" in request.COOKIES:
