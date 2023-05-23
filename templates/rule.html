@@ -94,6 +94,7 @@
             var requestMethodSelect = document.createElement("select")
             requestMethodSelect.classList.add("compare-value")
             requestMethodSelect.classList.add("form-select")
+
             var postMethod = document.createElement("option")
             var getMethod = document.createElement("option")
             getMethod.setAttribute("value", "get")
@@ -103,6 +104,7 @@
             requestMethodSelect.appendChild(getMethod)
             requestMethodSelect.appendChild(postMethod)
             conditionWrapper.appendChild(requestMethodSelect)
+            conditionWrapper.style.display = "block";
             }
       }
     )
