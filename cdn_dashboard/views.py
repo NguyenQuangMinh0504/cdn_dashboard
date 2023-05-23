@@ -125,8 +125,7 @@ def setting(request: HttpRequest):
         else:
             domain_rule["cache_key"] = 4
         rule_table.set("saugau.com", json.dumps(domain_rule))
-
-    print(domain_rule)
+        print(json.loads(rule_table.get("saugau.com").decode("utf-8")))
 
     if "auth_token" in request.COOKIES:
         auth_token = request.COOKIES["auth_token"]
