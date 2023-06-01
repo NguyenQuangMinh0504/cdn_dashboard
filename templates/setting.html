@@ -47,18 +47,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
     <script>
       const textBoxWrapper = document.getElementById("text-box-wrapper")
-      const cookieBox = document.getElementById("cookie-cache-key")
-      cookieBox.addEventListener("change", () => {
-        textBoxWrapper.appendChild(document.createElement("br"))
-        var cookieCacheKeyInstructText = document.createElement("h5")
-        cookieCacheKeyInstructText.textContent = "Những giá trị điền vào sẽ dùng làm một phần của cache key."
-        textBoxWrapper.appendChild(cookieCacheKeyInstructText)
-        var cookieCacheKeyInputBox = document.createElement("input")
-        cookieCacheKeyInputBox.setAttribute("type", "text")
-        cookieCacheKeyInputBox.setAttribute("placeholder", "Danh sách cookie")  
-        cookieCacheKeyInputBox.setAttribute("name", "cookie-cache-key-list")
-        cookieCacheKeyInputBox.classList.add("form-control")
-        textBoxWrapper.appendChild(cookieCacheKeyInputBox)
+      const cookieCheckBox = document.getElementById("cookie-cache-key")
+      cookieCheckBox.addEventListener("change", () => {
+        if (cookieCheckBox.checked) {
+          textBoxWrapper.appendChild(document.createElement("br"))
+          var cookieCacheKeyInstructText = document.createElement("h5")
+          cookieCacheKeyInstructText.textContent = "Những giá trị điền vào sẽ dùng làm một phần của cache key."
+          textBoxWrapper.appendChild(cookieCacheKeyInstructText)
+          var cookieCacheKeyInputBox = document.createElement("input")
+          cookieCacheKeyInputBox.setAttribute("type", "text")
+          cookieCacheKeyInputBox.setAttribute("placeholder", "Danh sách cookie")  
+          cookieCacheKeyInputBox.setAttribute("name", "cookie-cache-key-list")
+          cookieCacheKeyInputBox.classList.add("form-control")
+          textBoxWrapper.appendChild(cookieCacheKeyInputBox)
+        }
+        else {
+          textBoxWrapper.innerHTML = ""
+        }
       })
 
     </script>
