@@ -47,11 +47,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
     <script>
       const textBoxWrapper = document.getElementById("text-box-wrapper")
-      const selectBox = document.getElementById("cookie-cache-key")
-      var cookieCacheKeyInstructText = document.createElement("h2")
-      cookieCacheKeyInstructText.textContent = "Những giá trị điền vào sẽ dùng làm một phần của cache key."
-      textBoxWrapper.appendChild(cookieCacheKeyInstructText)
-      
+      const cookieBox = document.getElementById("cookie-cache-key")
+      cookieBox.addEventListener("change", () => {
+        
+        var cookieCacheKeyInstructText = document.createElement("h2")
+        cookieCacheKeyInstructText.textContent = "Những giá trị điền vào sẽ dùng làm một phần của cache key."
+        textBoxWrapper.appendChild(cookieCacheKeyInstructText)
+    
+      })
+
     </script>
   </div>
 </body>
