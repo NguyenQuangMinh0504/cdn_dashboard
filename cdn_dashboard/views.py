@@ -142,12 +142,22 @@ def setting(request: HttpRequest):
     if request.method == "POST":
 
         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-        domain_rule = json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8"))
+        domain_rule = json.loads(
+            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
+            )
         print(request.POST)
+
         if "querystring-cache-key" in request.POST:
-            domain_rule["cache_key"] = 5
+            if "device-cache-key" in request.POST:
+                domain_rule["cache_key"] = 7
+            else:
+                domain_rule["cache_key"] = 5
         else:
-            domain_rule["cache_key"] = 4
+            if "device-cache-key" in request.POST:
+                domain_rule["cache_key"] = 6
+            else:
+                domain_rule["cache_key"] = 4
+
         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
         print(json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")))
 
