@@ -51,13 +51,14 @@
       cookieBox.addEventListener("change", () => {
 
 
-        var cookieCacheKeyInstructText = document.createElement("h3")
+        var cookieCacheKeyInstructText = document.createElement("h5")
         cookieCacheKeyInstructText.textContent = "Những giá trị điền vào sẽ dùng làm một phần của cache key."
         textBoxWrapper.appendChild(cookieCacheKeyInstructText)
         var cookieCacheKeyInputBox = document.createElement("input")
         cookieCacheKeyInputBox.setAttribute("type", "text")
         cookieCacheKeyInputBox.setAttribute("placeholder", "Danh sách cookie")  
         cookieCacheKeyInputBox.setAttribute("name", "cookie-cache-key-list")
+        cookieCacheKeyInputBox.classList.add("form-control")
         textBoxWrapper.appendChild(cookieCacheKeyInputBox)
       })
 
