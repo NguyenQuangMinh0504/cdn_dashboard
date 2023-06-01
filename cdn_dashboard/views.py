@@ -161,6 +161,9 @@ def setting(request: HttpRequest):
             else:
                 domain_rule["cache_key"] = 4
 
+        if "cookie-cache-key" in request.POST:
+            print(request.POST['cookie-cache-key-list'])
+
         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
 
         print(json.loads(
