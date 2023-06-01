@@ -116,7 +116,7 @@ def rule(request: HttpRequest):
             domain_rule["rule:1"]["actions"] = [["url_rewrite",
                                                  data["source-pattern"],
                                                  data["destination"]]]
-            
+
         if data["compare-method"] == "not-equal":
             domain_rule["rule:1"]["conditions"] = [
                 ["request_method_not_equal", "", "GET"]
@@ -127,7 +127,10 @@ def rule(request: HttpRequest):
                 ]
 
         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
-        print(json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")))
+        print(json.loads(
+            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
+            )
+            )
 
     context = {}
     if "auth_token" in request.COOKIES:
