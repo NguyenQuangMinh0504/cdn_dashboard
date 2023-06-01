@@ -49,8 +49,7 @@
       const textBoxWrapper = document.getElementById("text-box-wrapper")
       const cookieBox = document.getElementById("cookie-cache-key")
       cookieBox.addEventListener("change", () => {
-
-
+        textBoxWrapper.appendChild(document.createElement("br"))
         var cookieCacheKeyInstructText = document.createElement("h5")
         cookieCacheKeyInstructText.textContent = "Những giá trị điền vào sẽ dùng làm một phần của cache key."
         textBoxWrapper.appendChild(cookieCacheKeyInstructText)
