@@ -19,14 +19,12 @@
       <form action="/setting/" method="post">
         {% csrf_token %}
         <h2>Cache key</h2>
-
+        <br>
         <div class="form-check form-switch">
           <label class="form-check-label" for="toggleSwitch">Cache query string</label>
           <input class="form-check-input" type="checkbox" name="querystring-cache-key">
         </div>
-
         <br>
-
         <div class="form-check form-switch">
           <label class="form-check-label" for="toggleSwitch"> Device </label>
           <input class="form-check-input" type="checkbox" name="device-cache-key">
