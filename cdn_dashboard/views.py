@@ -159,7 +159,10 @@ def setting(request: HttpRequest):
                 domain_rule["cache_key"] = 4
 
         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
-        print(json.loads(rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")))
+
+        print(json.loads(
+            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8"))
+            )
 
     if "auth_token" in request.COOKIES:
         auth_token = request.COOKIES["auth_token"]

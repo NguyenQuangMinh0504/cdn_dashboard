@@ -14,7 +14,6 @@
     <h1>Setting</h1>
     <br>
 
-
     <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
       <form action="/setting/" method="post">
         {% csrf_token %}
@@ -30,15 +29,30 @@
           <input class="form-check-input" type="checkbox" name="device-cache-key">
         </div>
         <br>
+        <div class="form-check form-switch">
+          <label class="form-check-label" for="toggleSwitch"> Cookie cache key </label>
+          <input class="form-check-input" type="checkbox" name="cookie-cache-key" id="cookie-cache-key">
+        </div>
+
+        <div id="text-box-wrapper">
+
+        </div>
+        <br>
         <div class="text-end">
           <button type="submit" class="btn btn-primary">Lưu</button>
         </div>
        </form>
     </div>
     
-
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const textBoxWrapper = document.getElementById("text-box-wrapper")
+      const selectBox = document.getElementById("cookie-cache-key")
+      var cookieCacheKeyInstructText = document.createElement("h2")
+      cookieCacheKeyInstructText.textContent = "Những giá trị điền vào sẽ dùng làm một phần của cache key."
+      textBoxWrapper.appendChild(cookieCacheKeyInstructText)
+      
+    </script>
   </div>
 </body>
 </html>
