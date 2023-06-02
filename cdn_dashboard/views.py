@@ -164,7 +164,7 @@ def setting(request: HttpRequest):
 
         if "cookie-cache-key" in domain_setting:
             print(domain_setting['cookie-cache-key-list'].split(","))
-            domain_rule["cookie_cache_key"] = domain_setting['cookie-cache-key-list'].split(",")
+            domain_rule["cookie_cache_keys"] = domain_setting['cookie-cache-key-list'].split(",")
 
         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
 
