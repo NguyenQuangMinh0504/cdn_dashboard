@@ -129,12 +129,7 @@
           addCookieButton.classList.add("btn-primary")
           addCookieButton.textContent = "Thêm cookie"
           addCookieButton.addEventListener("click", () => {
-            var foo = document.createElement("h5")
-            foo.textContent = "hello"
-            var bar = createCookieWrapper()
-            textBoxWrapper.insertBefore(bar, addCookieButton)
-            textBoxWrapper.insertBefore(foo, addCookieButton)
-
+            textBoxWrapper.insertBefore(createCookieWrapper(), addCookieButton)
           })
           textBoxWrapper.appendChild(addCookieButton)
 
