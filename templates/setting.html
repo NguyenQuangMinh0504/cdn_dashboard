@@ -54,6 +54,10 @@
         if (cookieCheckBox.checked) {
           textBoxWrapper.setAttribute("style", "border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;")
           textBoxWrapper.appendChild(document.createElement("br"))
+
+          var cookieInstructText = document.createElement("h5")
+          cookieInstructText.textContent = "CDN sẽ lấy những giá trị của cookie được khai báo làm 1 phần của cache key."
+          textBoxWrapper.appendChild(cookieInstructText)
           
           // Cookie name wrapper
           var cookieNameWrapper = document.createElement("div")
@@ -71,7 +75,7 @@
           // Cookie list input
           var cookieValueInputBox = document.createElement("input")
           cookieValueInputBox.setAttribute("type", "text")
-          cookieValueInputBox.setAttribute("placeholder", " Danh sách giá trị của cookie. Giá trị này sẽ là 1 phần của cache key")  
+          cookieValueInputBox.setAttribute("placeholder", " Danh sách giá trị của cookie. Cách nhau bởi dấu phẩy")  
           cookieValueInputBox.setAttribute("name", "cookie-value-list")
           cookieValueInputBox.classList.add("form-control")
           textBoxWrapper.appendChild(cookieValueInputBox)
