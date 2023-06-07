@@ -50,7 +50,7 @@
       function createCookieWrapper() {
         var cookieWrapper = document.createElement("div")
         cookieWrapper.setAttribute("style", "border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;")
-        textBoxWrapper.appendChild(cookieWrapper)
+
         // Cookie name wrapper
         var cookieNameWrapper = document.createElement("div")
         cookieNameWrapper.classList.add("col-md-4")
@@ -130,6 +130,7 @@
           addCookieButton.textContent = "Thêm cookie"
           addCookieButton.addEventListener("click", () => {
             textBoxWrapper.insertBefore(createCookieWrapper(), addCookieButton)
+            textBoxWrapper.insertBefore(document.createElement("br"), addCookieButton)
           })
           textBoxWrapper.appendChild(addCookieButton)
 
