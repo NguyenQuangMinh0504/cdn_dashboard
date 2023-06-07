@@ -46,6 +46,40 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
     <script>
+
+      function createCookieWrapper() {
+        var cookieWrapper = document.createElement("div")
+        cookieWrapper.setAttribute("style", "border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;")
+        textBoxWrapper.appendChild(cookieWrapper)
+        // Cookie name wrapper
+        var cookieNameWrapper = document.createElement("div")
+        cookieNameWrapper.classList.add("col-md-4")
+        cookieWrapper.appendChild(cookieNameWrapper)
+
+        var cookieNameInput = document.createElement("input")
+        cookieNameInput.setAttribute("type", "text")
+        cookieNameInput.setAttribute("placeholder", "Tên cookie")
+        cookieNameInput.classList.add("form-control")
+        cookieNameWrapper.appendChild(cookieNameInput)
+
+        cookieWrapper.appendChild(document.createElement("br"))
+
+        // Cookie list input
+        var cookieValueInputBox = document.createElement("input")
+        cookieValueInputBox.setAttribute("type", "text")
+        cookieValueInputBox.setAttribute("placeholder", " Danh sách giá trị của cookie. Cách nhau bởi dấu phẩy")  
+        cookieValueInputBox.setAttribute("name", "cookie-value-list")
+        cookieValueInputBox.classList.add("form-control")
+        cookieWrapper.appendChild(cookieValueInputBox)
+
+        return cookieWrapper
+
+      }
+
+
+
+
+
       const textBoxWrapper = document.getElementById("text-box-wrapper")
       const cookieCheckBox = document.getElementById("cookie-cache-key")
 
@@ -97,6 +131,8 @@
           addCookieButton.addEventListener("click", () => {
             var foo = document.createElement("h5")
             foo.textContent = "hello"
+            var bar = createCookieWrapper()
+            textBoxWrapper.insertBefore(bar, addCookieButton)
             textBoxWrapper.insertBefore(foo, addCookieButton)
 
           })
