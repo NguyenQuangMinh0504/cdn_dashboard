@@ -165,8 +165,7 @@ def setting(request: HttpRequest):
             for name, value in zip(domain_setting.getlist("cookie-name"),
                                    domain_setting.getlist("cookie-value-list")
                                    ):
-                print(name)
-                print(value)
+                domain_rule["cookie_cache_keys"]["name"] = value.split(",")
 
         else:
             domain_rule["cookie_cache_keys"] = []
