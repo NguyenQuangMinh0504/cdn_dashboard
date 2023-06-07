@@ -76,10 +76,6 @@
 
       }
 
-
-
-
-
       const textBoxWrapper = document.getElementById("text-box-wrapper")
       const cookieCheckBox = document.getElementById("cookie-cache-key")
 
@@ -92,11 +88,10 @@
           var cookieInstructText = document.createElement("h5")
           cookieInstructText.textContent = "CDN sẽ lấy những giá trị của cookie được khai báo làm 1 phần của cache key."
           textBoxWrapper.appendChild(cookieInstructText)
-
+          
           textBoxWrapper.appendChild(document.createElement("br"))
-
-
           textBoxWrapper.appendChild(createCookieWrapper())
+          textBoxWrapper.appendChild(document.createElement("br"))
 
           // add cookie button
           var addCookieButton = document.createElement("button")
