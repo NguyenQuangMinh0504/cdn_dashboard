@@ -148,10 +148,7 @@ def setting(request: HttpRequest):
         domain_rule = json.loads(
             rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
             )
-        print(request.POST)
         domain_setting = request.POST
-        print("Type of domain setting is: ", type(domain_setting))
-        print("Type of cookie name list is:", type(domain_setting["cookie-name"]))
 
         if "querystring-cache-key" in domain_setting:
             if "device-cache-key" in domain_setting:
@@ -164,8 +161,8 @@ def setting(request: HttpRequest):
             else:
                 domain_rule["cache_key"] = 4
         if "cookie-cache-key" in domain_setting:
-            print("Cookie name are: ", domain_setting["cookie-name"])
-            print("Cookie value list are: ", domain_setting["cookie-value-list"])
+            print("Cookie name are: ", domain_setting.getlist("cookie-name"))
+            print("Cookie value list are: ", domain_setting.getlist("cookie-value-list"))
 
             # for name, value_list in zip(domain_setting["cookie-name"],
             #                             domain_setting["cookie-value-list"]):
