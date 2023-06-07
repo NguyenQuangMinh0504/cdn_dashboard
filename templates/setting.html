@@ -97,7 +97,7 @@
           addCookieButton.addEventListener("click", () => {
             var foo = document.createElement("h5")
             foo.textContent = "hello"
-            textBoxWrapper.appendChild(foo)
+            textBoxWrapper.insertBefore(foo, addCookieButton)
 
           })
           textBoxWrapper.appendChild(addCookieButton)
