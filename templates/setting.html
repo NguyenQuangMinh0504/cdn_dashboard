@@ -60,11 +60,15 @@
           textBoxWrapper.appendChild(cookieInstructText)
 
           textBoxWrapper.appendChild(document.createElement("br"))
+
+          var cookieWrapper = document.createElement("div")
+          cookieWrapper.setAttribute("style", "border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;")
+          textBoxWrapper.appendChild(cookieWrapper)
           
           // Cookie name wrapper
           var cookieNameWrapper = document.createElement("div")
           cookieNameWrapper.classList.add("col-md-4")
-          textBoxWrapper.appendChild(cookieNameWrapper)
+          cookieWrapper.appendChild(cookieNameWrapper)
 
           var cookieNameInput = document.createElement("input")
           cookieNameInput.setAttribute("type", "text")
@@ -80,7 +84,7 @@
           cookieValueInputBox.setAttribute("placeholder", " Danh sách giá trị của cookie. Cách nhau bởi dấu phẩy")  
           cookieValueInputBox.setAttribute("name", "cookie-value-list")
           cookieValueInputBox.classList.add("form-control")
-          textBoxWrapper.appendChild(cookieValueInputBox)
+          cookieWrapper.appendChild(cookieValueInputBox)
 
           textBoxWrapper.appendChild(document.createElement("br"))
 
