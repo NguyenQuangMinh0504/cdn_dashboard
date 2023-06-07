@@ -161,13 +161,13 @@ def setting(request: HttpRequest):
             else:
                 domain_rule["cache_key"] = 4
         if "cookie-cache-key" in domain_setting:
-            print("Cookie name are: ", domain_setting.getlist("cookie-name"))
-            print("Cookie value list are: ", domain_setting.getlist("cookie-value-list"))
 
-            # for name, value_list in zip(domain_setting["cookie-name"],
-            #                             domain_setting["cookie-value-list"]):
-            #     print(name)
-            #     print(value_list)
+            for name, value in zip(domain_setting.getlist("cookie-name"),
+                                   domain_setting.getlist("cookie-value-list")
+                                   ):
+                print(name)
+                print(value)
+
         else:
             domain_rule["cookie_cache_keys"] = []
 
