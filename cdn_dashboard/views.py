@@ -151,6 +151,7 @@ def setting(request: HttpRequest):
         print(request.POST)
         domain_setting = request.POST
         print("Type of domain setting is: ", type(domain_setting))
+        print("Type of cookie name list is:", type(domain_setting["cookie-name"]))
 
         if "querystring-cache-key" in domain_setting:
             if "device-cache-key" in domain_setting:
