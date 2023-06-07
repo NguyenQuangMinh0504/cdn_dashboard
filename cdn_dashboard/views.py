@@ -165,10 +165,11 @@ def setting(request: HttpRequest):
             for name, value in zip(domain_setting.getlist("cookie-name"),
                                    domain_setting.getlist("cookie-value-list")
                                    ):
+                domain_rule["cookie_cache_keys"] = {}
                 domain_rule["cookie_cache_keys"]["name"] = value.split(",")
 
         else:
-            domain_rule["cookie_cache_keys"] = []
+            domain_rule["cookie_cache_keys"] = {}
 
         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
 
