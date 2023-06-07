@@ -58,6 +58,8 @@
           var cookieInstructText = document.createElement("h5")
           cookieInstructText.textContent = "CDN sẽ lấy những giá trị của cookie được khai báo làm 1 phần của cache key."
           textBoxWrapper.appendChild(cookieInstructText)
+
+          textBoxWrapper.appendChild(document.createElement("br"))
           
           // Cookie name wrapper
           var cookieNameWrapper = document.createElement("div")
@@ -79,6 +81,11 @@
           cookieValueInputBox.setAttribute("name", "cookie-value-list")
           cookieValueInputBox.classList.add("form-control")
           textBoxWrapper.appendChild(cookieValueInputBox)
+
+          // add cookie button
+          var addCookieButton = document.createElement("button")
+          addCookieButton.classList.add("btn btn-primary")
+          textBoxWrapper.appendChild(addCookieButton)
 
         }
         else {
