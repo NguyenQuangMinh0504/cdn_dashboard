@@ -53,18 +53,7 @@
       cookieCheckBox.addEventListener("change", () => {
         if (cookieCheckBox.checked) {
           textBoxWrapper.appendChild(document.createElement("br"))
-          var cookieCacheKeyInstructText = document.createElement("h5")
-          cookieCacheKeyInstructText.textContent = "Những giá trị điền vào sẽ dùng làm một phần của cache key."
-          textBoxWrapper.appendChild(cookieCacheKeyInstructText)
-
-          // Cookie list input
-          var cookieCacheKeyInputBox = document.createElement("input")
-          cookieCacheKeyInputBox.setAttribute("type", "text")
-          cookieCacheKeyInputBox.setAttribute("placeholder", "Danh sách cookie")  
-          cookieCacheKeyInputBox.setAttribute("name", "cookie-cache-key-list")
-          cookieCacheKeyInputBox.classList.add("form-control")
-          textBoxWrapper.appendChild(cookieCacheKeyInputBox)
-
+          
           // Cookie name wrapper
           var cookieNameWrapper = document.createElement("div")
           cookieNameWrapper.classList.add("col-md-4")
@@ -75,6 +64,20 @@
           cookieNameInput.setAttribute("placeholder", "Tên cookie")
           cookieNameInput.classList.add("form-control")
           cookieNameWrapper.appendChild(cookieNameInput)
+
+          textBoxWrapper.appendChild(document.createElement("br"))
+
+          var cookieValueInstructText = document.createElement("h5")
+          cookieValueInstructText.textContent = "Nhập vào giá trị của cookie. Những giá trị này sẽ là 1 phần của cache key"
+          textBoxWrapper.appendChild(cookieValueInstructText)
+
+          // Cookie list input
+          var cookieCacheKeyInputBox = document.createElement("input")
+          cookieValueInputBox.setAttribute("type", "text")
+          cookieValueInputBox.setAttribute("placeholder", " Danh sách giá trị của cookie")  
+          cookieValueInputBox.setAttribute("name", "cookie-value-list")
+          cookieValueInputBox.classList.add("form-control")
+          textBoxWrapper.appendChild(cookieValueInputBox)
 
         }
         else {
