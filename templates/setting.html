@@ -52,6 +52,7 @@
       // Tạo input box khi check cookie 
       cookieCheckBox.addEventListener("change", () => {
         if (cookieCheckBox.checked) {
+          textBoxWrapper.setAttribute("style", "border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;")
           textBoxWrapper.appendChild(document.createElement("br"))
           
           // Cookie name wrapper
@@ -67,14 +68,10 @@
 
           textBoxWrapper.appendChild(document.createElement("br"))
 
-          var cookieValueInstructText = document.createElement("h5")
-          cookieValueInstructText.textContent = "Nhập vào giá trị của cookie. Những giá trị này sẽ là 1 phần của cache key"
-          textBoxWrapper.appendChild(cookieValueInstructText)
-
           // Cookie list input
           var cookieValueInputBox = document.createElement("input")
           cookieValueInputBox.setAttribute("type", "text")
-          cookieValueInputBox.setAttribute("placeholder", " Danh sách giá trị của cookie")  
+          cookieValueInputBox.setAttribute("placeholder", " Danh sách giá trị của cookie. Giá trị này sẽ là 1 phần của cache key")  
           cookieValueInputBox.setAttribute("name", "cookie-value-list")
           cookieValueInputBox.classList.add("form-control")
           textBoxWrapper.appendChild(cookieValueInputBox)
