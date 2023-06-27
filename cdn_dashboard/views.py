@@ -32,6 +32,7 @@ def index(request: HttpRequest):
             domains = {}
             for domain in domain_table.find({"auth_token": auth_token}):
                 context['domains'].append(domain)
+                print(domain)
                 domains[domain] = total_bytes_sent_rdb.get(
                     get_domain_slug(domain) + ".sapphirecdn.com"
                     )
