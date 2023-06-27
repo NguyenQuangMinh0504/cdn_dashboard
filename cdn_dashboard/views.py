@@ -4,7 +4,7 @@ import secrets
 import redis
 import json
 
-from .db import domain_table, domain_table_rdb, user_table
+from .db import domain_table, domain_table_rdb, user_table, total_bytes_sent_rdb
 from cdn_dashboard.utils import get_domain_slug
 
 
@@ -29,8 +29,13 @@ def index(request: HttpRequest):
 
         if domain_table.count_documents({"auth_token": auth_token}) > 0:
             context['domains'] = []
+            domains = {}
             for domain in domain_table.find({"auth_token": auth_token}):
                 context['domains'].append(domain)
+                domains[domain] = total_bytes_sent_rdb.get(
+                    get_domain_slug(domain) + ".sapphirecdn.com"
+                    )
+            print(domains)
 
     return render(request=request,
                   template_name="index.html",
