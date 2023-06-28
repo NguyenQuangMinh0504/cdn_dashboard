@@ -4,8 +4,8 @@ import secrets
 import redis
 import json
 
-from .db import (domain_table, domain_table_rdb,
-                 user_table, total_bytes_sent_rdb)
+from .db import domain_table_rdb, total_bytes_sent_rdb, cache_key_setting_rdb
+from .db import domain_table, user_table
 from cdn_dashboard.utils import get_domain_cdn
 
 
@@ -200,7 +200,30 @@ def rule(request: HttpRequest):
 
 def setting(request: HttpRequest):
     context = {}
-    if request.method == "POST":
+
+    if "auth_token" in request.COOKIES:
+        auth_token = request.COOKIES["auth_token"]
+        context["auth_token"] = auth_token
+
+        if domain_table.count_documents({"auth_token": auth_token}) > 0:
+            domains = []
+            for domain in domain_table.find({"auth_token": auth_token}):
+                domains.append(domain["domain"])
+            print(domains)
+
+    # if request.method == "POST":
+    #     domain_setting = request.POST
+    #     if "querystring-cache-key" in domain_setting:
+    #         if "device-cache-key" in domain_setting:
+    #             domain_rule["cache_key"] = 7
+    #         else:
+    #             domain_rule["cache_key"] = 5
+    #     else:
+    #         if "device-cache-key" in domain_setting:
+    #             domain_rule["cache_key"] = 6
+    #         else:
+    #             domain_rule["cache_key"] = 4
+
         print(request.POST)
 
     return render(request=request,
