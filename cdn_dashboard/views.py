@@ -39,8 +39,11 @@ def index(request: HttpRequest):
 
                 if domain_total_bytes_sent is None:
                     domain_data["total_bytes_sent"] = 0
+
                 else:
-                    domain_data = int(domain_total_bytes_sent)
+                    domain_data["total_bytes_sent"] = int(
+                        domain_total_bytes_sent
+                        )
 
                 domains[domain_name] = domain_data
             context["domains"] = domains
