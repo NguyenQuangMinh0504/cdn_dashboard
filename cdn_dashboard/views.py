@@ -33,9 +33,13 @@ def index(request: HttpRequest):
             for domain in domain_table.find({"auth_token": auth_token}):
                 context['domains'].append(domain)
                 domain_name = domain["domain"]
-                domains[domain_name] = int(total_bytes_sent_rdb.get(
-                    get_domain_cdn(domain_name))) or 0
-
+                domain_total_bytes_sent = total_bytes_sent_rdb.get(
+                    get_domain_cdn(domain_name)
+                    )
+                if domain_total_bytes_sent is None:
+                    domains[domain_name] = 0
+                else:
+                    domains[domain_name] = int(domain_total_bytes_sent)
             print(domains)
 
     return render(request=request,
