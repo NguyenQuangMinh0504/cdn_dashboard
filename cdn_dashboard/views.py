@@ -211,20 +211,22 @@ def setting(request: HttpRequest):
                 domains.append(domain["domain"])
             print(domains)
 
-    # if request.method == "POST":
-    #     domain_setting = request.POST
-    #     if "querystring-cache-key" in domain_setting:
-    #         if "device-cache-key" in domain_setting:
-    #             domain_rule["cache_key"] = 7
-    #         else:
-    #             domain_rule["cache_key"] = 5
-    #     else:
-    #         if "device-cache-key" in domain_setting:
-    #             domain_rule["cache_key"] = 6
-    #         else:
-    #             domain_rule["cache_key"] = 4
+            if request.method == "POST":
+                domain_setting = request.POST
+                cache_key_setting = 0
+                if "querystring-cache-key" in domain_setting:
+                    if "device-cache-key" in domain_setting:
+                        cache_key_setting = 3
+                    else:
+                        cache_key_setting = 1
+                else:
+                    if "device-cache-key" in domain_setting:
+                        cache_key_setting = 2
+                    else:
+                        cache_key_setting = 0
 
-        print(request.POST)
+            print(request.POST)
+            print(cache_key_setting)
 
     return render(request=request,
                   template_name="setting.html",
