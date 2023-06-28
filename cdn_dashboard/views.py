@@ -155,6 +155,7 @@ def delete(request: HttpRequest):
 def rule(request: HttpRequest):
     if request.method == "POST":
         print(request.POST)
+        print("Hello World")
     context = {}
     if "auth_token" in request.COOKIES:
         context["auth_token"] = request.COOKIES["auth_token"]
