@@ -33,8 +33,8 @@ def index(request: HttpRequest):
             for domain in domain_table.find({"auth_token": auth_token}):
                 context['domains'].append(domain)
                 domain_name = domain["domain"]
-                domains[domain_name] = total_bytes_sent_rdb.get(
-                    get_domain_cdn(domain_name)
+                domains[domain_name] = int(total_bytes_sent_rdb.get(
+                    get_domain_cdn(domain_name).decode("utf-8"))
                     ) or 0
 
             print(domains)
