@@ -40,7 +40,7 @@ def index(request: HttpRequest):
                 else:
                     domains[domain_name] = int(domain_total_bytes_sent)
             context["domains"] = domains
-
+    print(context)
     return render(request=request,
                   template_name="index.html",
                   context=context)
