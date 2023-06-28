@@ -36,11 +36,12 @@ def index(request: HttpRequest):
                 domain_total_bytes_sent = total_bytes_sent_rdb.get(
                     get_domain_cdn(domain_name)
                     )
+
                 if domain_total_bytes_sent is None:
-                    domains[domain_name] = 0
+                    domain_data["total_bytes_sent"] = 0
                 else:
-                    domains[domain_name] = int(domain_total_bytes_sent)
-                domain_data["total_bytes_sent"] = domain_total_bytes_sent
+                    domain_data = int(domain_total_bytes_sent)
+
                 domains[domain_name] = domain_data
             context["domains"] = domains
     print(context)

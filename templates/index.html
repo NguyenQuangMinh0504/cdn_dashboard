@@ -22,7 +22,7 @@
       {% for domain in domains %}
       <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
           <p>{{ domain }}</p>
-          <p>Tổng data transfer là: 100 GB</p>
+          <p>Tổng data transfer là: {{ domain.total_bytes_sent }}</p>
           <form action="/delete/" method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-primary">Xoá domain</button>
