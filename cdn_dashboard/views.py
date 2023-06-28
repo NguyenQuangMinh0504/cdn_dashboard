@@ -224,9 +224,9 @@ def setting(request: HttpRequest):
                         cache_key_setting = 2
                     else:
                         cache_key_setting = 0
-
-            print(request.POST)
-            print(cache_key_setting)
+                for domain in domains:
+                    cache_key_setting_rdb.set(name=get_domain_cdn(domain),
+                                              value=cache_key_setting)
 
     return render(request=request,
                   template_name="setting.html",
