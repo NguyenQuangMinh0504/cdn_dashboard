@@ -112,96 +112,97 @@ def delete(request: HttpRequest):
         return HttpResponseRedirect(redirect_to="/")
 
 
-# def rule(request: HttpRequest):
+def rule(request: HttpRequest):
+    if request.method == "POST":
+        print(request.POST)
+        data = request.POST
+        rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
+        domain_rule = json.loads(
+            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
+            )
+        if data["action"] == "ignore-query-string":
+            domain_rule["rule:1"]["actions"] = [["ignore_query_string",
+                                                 "",
+                                                 ""]]
+
+        elif data["action"] == "rewrite-url":
+            domain_rule["rule:1"]["actions"] = [["url_rewrite",
+                                                 data["source-pattern"],
+                                                 data["destination"]]]
+
+        if data["compare-method"] == "not-equal":
+            domain_rule["rule:1"]["conditions"] = [
+                ["request_method_not_equal", "", "GET"]
+                ]
+        elif data["compare-method"] == "equal":
+            domain_rule["rule:1"]["conditions"] = [
+                ["request_method_equal", "", "GET"]
+                ]
+
+        rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
+        print(json.loads(
+            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
+            )
+            )
+
+    context = {}
+    if "auth_token" in request.COOKIES:
+        auth_token = request.COOKIES["auth_token"]
+        context["auth_token"] = auth_token
+
+    return render(request=request, template_name="rule.html", context=context)
+
+
+# def setting(request: HttpRequest):
+#     context = {}
 #     if request.method == "POST":
-#         print(request.POST)
-#         data = request.POST
+
 #         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
 #         domain_rule = json.loads(
 #             rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
 #             )
-#         if data["action"] == "ignore-query-string":
-#             domain_rule["rule:1"]["actions"] = [["ignore_query_string",
-#                                                  "",
-#                                                  ""]]
+#         domain_setting = request.POST
 
-#         elif data["action"] == "rewrite-url":
-#             domain_rule["rule:1"]["actions"] = [["url_rewrite",
-#                                                  data["source-pattern"],
-#                                                  data["destination"]]]
+#         if "querystring-cache-key" in domain_setting:
+#             if "device-cache-key" in domain_setting:
+#                 domain_rule["cache_key"] = 7
+#             else:
+#                 domain_rule["cache_key"] = 5
+#         else:
+#             if "device-cache-key" in domain_setting:
+#                 domain_rule["cache_key"] = 6
+#             else:
+#                 domain_rule["cache_key"] = 4
+#         if "cookie-cache-key" in domain_setting:
+#             domain_rule["cookie_cache_keys"] = {}
+#             for name, value in zip(domain_setting.getlist("cookie-name"),
+#                                    domain_setting.getlist("cookie-value-list")
+#                                    ):
 
-#         if data["compare-method"] == "not-equal":
-#             domain_rule["rule:1"]["conditions"] = [
-#                 ["request_method_not_equal", "", "GET"]
-#                 ]
-#         elif data["compare-method"] == "equal":
-#             domain_rule["rule:1"]["conditions"] = [
-#                 ["request_method_equal", "", "GET"]
-#                 ]
+#                 domain_rule["cookie_cache_keys"][name] = value.split(",")
+
+#         else:
+#             domain_rule["cookie_cache_keys"] = {}
 
 #         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
+
 #         print(json.loads(
-#             rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
-#             )
+#             rule_table.get("saugau.edge.vccloud.vn").decode("utf-8"))
 #             )
 
-#     context = {}
 #     if "auth_token" in request.COOKIES:
 #         auth_token = request.COOKIES["auth_token"]
 #         context["auth_token"] = auth_token
-
-#     return render(request=request, template_name="rule.html", context=context)
-
-def rule(request: HttpRequest):
-    if request.method == "POST":
-        print(request.POST)
-        print("Hello World")
-    context = {}
-    if "auth_token" in request.COOKIES:
-        context["auth_token"] = request.COOKIES["auth_token"]
-    return render(request=request, template_name="rule.html", context=context)
+#     return render(request=request,
+#                   template_name="setting.html",
+#                   context=context)
 
 
 def setting(request: HttpRequest):
     context = {}
     if request.method == "POST":
+        print(request.POST)
 
-        rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-        domain_rule = json.loads(
-            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
-            )
-        domain_setting = request.POST
-
-        if "querystring-cache-key" in domain_setting:
-            if "device-cache-key" in domain_setting:
-                domain_rule["cache_key"] = 7
-            else:
-                domain_rule["cache_key"] = 5
-        else:
-            if "device-cache-key" in domain_setting:
-                domain_rule["cache_key"] = 6
-            else:
-                domain_rule["cache_key"] = 4
-        if "cookie-cache-key" in domain_setting:
-            domain_rule["cookie_cache_keys"] = {}
-            for name, value in zip(domain_setting.getlist("cookie-name"),
-                                   domain_setting.getlist("cookie-value-list")
-                                   ):
-
-                domain_rule["cookie_cache_keys"][name] = value.split(",")
-
-        else:
-            domain_rule["cookie_cache_keys"] = {}
-
-        rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
-
-        print(json.loads(
-            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8"))
-            )
-
-    if "auth_token" in request.COOKIES:
-        auth_token = request.COOKIES["auth_token"]
-        context["auth_token"] = auth_token
     return render(request=request,
                   template_name="setting.html",
                   context=context)
