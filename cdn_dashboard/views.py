@@ -5,7 +5,7 @@ import redis
 import json
 
 from .db import domain_table, domain_table_rdb, user_table, total_bytes_sent_rdb
-from cdn_dashboard.utils import get_domain_slug
+from cdn_dashboard.utils import get_domain_slug, get_domain_cdn
 
 
 def login(request: HttpRequest):
@@ -33,8 +33,9 @@ def index(request: HttpRequest):
             for domain in domain_table.find({"auth_token": auth_token}):
                 context['domains'].append(domain)
                 print(domain)
+                domain_name = domain["domain"]
                 domains[domain] = total_bytes_sent_rdb.get(
-                    get_domain_slug(domain) + ".sapphirecdn.com"
+                    get_domain_cdn(domain_name)
                     )
             print(domains)
 
@@ -78,9 +79,7 @@ def create(request: HttpRequest):
              "domain": domain}
             )
 
-        domain_slug = get_domain_slug(domain)
-
-        domain_table_rdb.set(name=domain_slug + ".sapphirecdn.com",
+        domain_table_rdb.set(get_domain_cdn(domain),
                              value=domain)
 
         return HttpResponseRedirect(redirect_to="/")
@@ -99,8 +98,7 @@ def delete(request: HttpRequest):
         data = request.POST
         domain = data["domain"]
         domain_table.delete_many({"domain": domain})
-        domain_slug = get_domain_slug(domain)
-        domain_table_rdb.delete(domain_slug + ".sapphirecdn.com")
+        domain_table_rdb.delete(get_domain_cdn(domain))
 
         return HttpResponseRedirect(redirect_to="/")
 
