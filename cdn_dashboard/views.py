@@ -29,7 +29,7 @@ def index(request: HttpRequest):
         context["auth_token"] = auth_token
 
         if domain_table.count_documents({"auth_token": auth_token}) > 0:
-            domains = {}
+            domains = []
             for domain in domain_table.find({"auth_token": auth_token}):
                 domain_data = {}
                 domain_name = domain["domain"]
@@ -45,8 +45,7 @@ def index(request: HttpRequest):
                     domain_data["total_bytes_sent"] = int(
                         domain_total_bytes_sent
                         )
-
-                domains[domain_name] = domain_data
+                domains.append(domain_data)
             context["domains"] = domains
     print(context)
     return render(request=request,
