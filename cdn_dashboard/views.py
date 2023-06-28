@@ -112,44 +112,52 @@ def delete(request: HttpRequest):
         return HttpResponseRedirect(redirect_to="/")
 
 
+# def rule(request: HttpRequest):
+#     if request.method == "POST":
+#         print(request.POST)
+#         data = request.POST
+#         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
+#         domain_rule = json.loads(
+#             rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
+#             )
+#         if data["action"] == "ignore-query-string":
+#             domain_rule["rule:1"]["actions"] = [["ignore_query_string",
+#                                                  "",
+#                                                  ""]]
+
+#         elif data["action"] == "rewrite-url":
+#             domain_rule["rule:1"]["actions"] = [["url_rewrite",
+#                                                  data["source-pattern"],
+#                                                  data["destination"]]]
+
+#         if data["compare-method"] == "not-equal":
+#             domain_rule["rule:1"]["conditions"] = [
+#                 ["request_method_not_equal", "", "GET"]
+#                 ]
+#         elif data["compare-method"] == "equal":
+#             domain_rule["rule:1"]["conditions"] = [
+#                 ["request_method_equal", "", "GET"]
+#                 ]
+
+#         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
+#         print(json.loads(
+#             rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
+#             )
+#             )
+
+#     context = {}
+#     if "auth_token" in request.COOKIES:
+#         auth_token = request.COOKIES["auth_token"]
+#         context["auth_token"] = auth_token
+
+#     return render(request=request, template_name="rule.html", context=context)
+
 def rule(request: HttpRequest):
     if request.method == "POST":
         print(request.POST)
-        data = request.POST
-        rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-        domain_rule = json.loads(
-            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
-            )
-        if data["action"] == "ignore-query-string":
-            domain_rule["rule:1"]["actions"] = [["ignore_query_string",
-                                                 "",
-                                                 ""]]
-
-        elif data["action"] == "rewrite-url":
-            domain_rule["rule:1"]["actions"] = [["url_rewrite",
-                                                 data["source-pattern"],
-                                                 data["destination"]]]
-
-        if data["compare-method"] == "not-equal":
-            domain_rule["rule:1"]["conditions"] = [
-                ["request_method_not_equal", "", "GET"]
-                ]
-        elif data["compare-method"] == "equal":
-            domain_rule["rule:1"]["conditions"] = [
-                ["request_method_equal", "", "GET"]
-                ]
-
-        rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
-        print(json.loads(
-            rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
-            )
-            )
-
     context = {}
     if "auth_token" in request.COOKIES:
-        auth_token = request.COOKIES["auth_token"]
-        context["auth_token"] = auth_token
-
+        context["auth_token"] = request.COOKIES["auth_token"]
     return render(request=request, template_name="rule.html", context=context)
 
 
