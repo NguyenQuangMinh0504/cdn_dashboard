@@ -35,7 +35,8 @@ def index(request: HttpRequest):
                 domain_name = domain["domain"]
                 domains[domain_name] = total_bytes_sent_rdb.get(
                     get_domain_cdn(domain_name)
-                    )
+                    ) or 0
+
             print(domains)
 
     return render(request=request,
