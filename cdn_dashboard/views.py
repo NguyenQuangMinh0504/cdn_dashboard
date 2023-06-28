@@ -4,8 +4,9 @@ import secrets
 import redis
 import json
 
-from .db import domain_table, domain_table_rdb, user_table, total_bytes_sent_rdb
-from cdn_dashboard.utils import get_domain_slug, get_domain_cdn
+from .db import (domain_table, domain_table_rdb,
+                 user_table, total_bytes_sent_rdb)
+from cdn_dashboard.utils import get_domain_cdn
 
 
 def login(request: HttpRequest):
@@ -28,7 +29,6 @@ def index(request: HttpRequest):
         context["auth_token"] = auth_token
 
         if domain_table.count_documents({"auth_token": auth_token}) > 0:
-            context['domains'] = []
             domains = {}
             for domain in domain_table.find({"auth_token": auth_token}):
                 context['domains'].append(domain)
@@ -40,7 +40,7 @@ def index(request: HttpRequest):
                     domains[domain_name] = 0
                 else:
                     domains[domain_name] = int(domain_total_bytes_sent)
-            print(domains)
+            context["domains"] = domains
 
     return render(request=request,
                   template_name="index.html",
@@ -172,7 +172,7 @@ def setting(request: HttpRequest):
             for name, value in zip(domain_setting.getlist("cookie-name"),
                                    domain_setting.getlist("cookie-value-list")
                                    ):
-                
+
                 domain_rule["cookie_cache_keys"][name] = value.split(",")
 
         else:
