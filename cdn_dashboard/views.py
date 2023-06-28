@@ -34,8 +34,7 @@ def index(request: HttpRequest):
                 context['domains'].append(domain)
                 domain_name = domain["domain"]
                 domains[domain_name] = int(total_bytes_sent_rdb.get(
-                    get_domain_cdn(domain_name).decode("utf-8"))
-                    ) or 0
+                    get_domain_cdn(domain_name))) or 0
 
             print(domains)
 
