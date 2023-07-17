@@ -3,10 +3,20 @@
   become: yes
   name: Running process
   tasks:
+
+    - name: Find all process using port 80
+      ansible.builtin.shell: "lsof -t -i:80"
+      register: processes_on_port
+      
+    - name: Stop all processes running on port 80
+      ansible.builtin.shell: "kill -9 {{ item }}"
+      with_items: "{{ processes_on_port.stdout_lines }}"
+      ignore_errors: yes
+
     - name: Run openresty proxy server
       ansible.builtin.command: 
         chdir: /opt/cdn_dashboard/
-        cmd: openresty -c nginx.conf -p /opt/cdn_dashboard/ -s reload
+        cmd: openresty -c nginx.conf -p /opt/cdn_dashboard/
     - name: Running mongodb database
       ansible.builtin.systemd:
         name: mongod
