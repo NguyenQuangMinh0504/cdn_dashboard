@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import (login, index, register,
-                    logout, create, delete, rule, test, setting)
+                    logout, create, delete, rule, test, setting, cache_delete)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,6 @@ urlpatterns = [
     path(route="delete/", view=delete, name="delete"),
     path(route="rule/", view=rule, name="rule"),
     path(route="setting/", view=setting, name="setting"),
+    path(route="cache-delete/", view=cache_delete, name="cache-delete"),
     path(route="test/", view=test, name="test"),
 ]

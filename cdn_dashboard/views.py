@@ -188,6 +188,11 @@ def setting(request: HttpRequest):
                   context=context)
 
 
+def cache_delete(request: HttpRequest):
+    return render(request=request,
+                  template_name="cache_delete.html", context={})
+
+
 def test(request: HttpRequest):
     if request.method == "POST":
         print(request.POST)
