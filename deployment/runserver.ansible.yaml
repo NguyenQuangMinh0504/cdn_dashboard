@@ -5,8 +5,8 @@
   tasks:
     - name: Run openresty proxy server
       ansible.builtin.command: 
-        chdir: /home/nguyenquangminh/cdn_dashboard/
-        cmd: openresty -c nginx.conf -p /home/nguyenquangminh/cdn_dashboard/ -s reload
+        chdir: /opt/cdn_dashboard/
+        cmd: openresty -c nginx.conf -p /opt/cdn_dashboard/ -s reload
     - name: Running mongodb database
       ansible.builtin.systemd:
         name: mongod
@@ -14,6 +14,6 @@
     
     - name: Start redis server
       ansible.builtin.command:
-        chdir: /home/nguyenquangminh/cdn_dashboard/
+        chdir: /opt/cdn_dashboard/
         cmd: redis-server redis.conf
       
