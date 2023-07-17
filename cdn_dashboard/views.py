@@ -153,51 +153,6 @@ def rule(request: HttpRequest):
     return render(request=request, template_name="rule.html", context=context)
 
 
-# def setting(request: HttpRequest):
-#     context = {}
-#     if request.method == "POST":
-
-#         rule_table = redis.Redis(host="10.5.20.169", port=6378, db=4)
-#         domain_rule = json.loads(
-#             rule_table.get("saugau.edge.vccloud.vn").decode("utf-8")
-#             )
-#         domain_setting = request.POST
-
-#         if "querystring-cache-key" in domain_setting:
-#             if "device-cache-key" in domain_setting:
-#                 domain_rule["cache_key"] = 7
-#             else:
-#                 domain_rule["cache_key"] = 5
-#         else:
-#             if "device-cache-key" in domain_setting:
-#                 domain_rule["cache_key"] = 6
-#             else:
-#                 domain_rule["cache_key"] = 4
-#         if "cookie-cache-key" in domain_setting:
-#             domain_rule["cookie_cache_keys"] = {}
-#             for name, value in zip(domain_setting.getlist("cookie-name"),
-#                                    domain_setting.getlist("cookie-value-list")
-#                                    ):
-
-#                 domain_rule["cookie_cache_keys"][name] = value.split(",")
-
-#         else:
-#             domain_rule["cookie_cache_keys"] = {}
-
-#         rule_table.set("saugau.edge.vccloud.vn", json.dumps(domain_rule))
-
-#         print(json.loads(
-#             rule_table.get("saugau.edge.vccloud.vn").decode("utf-8"))
-#             )
-
-#     if "auth_token" in request.COOKIES:
-#         auth_token = request.COOKIES["auth_token"]
-#         context["auth_token"] = auth_token
-#     return render(request=request,
-#                   template_name="setting.html",
-#                   context=context)
-
-
 def setting(request: HttpRequest):
     context = {}
 
