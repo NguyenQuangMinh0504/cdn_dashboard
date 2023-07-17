@@ -17,6 +17,13 @@
       ansible.builtin.command: 
         chdir: /opt/cdn_dashboard/
         cmd: openresty -c nginx.conf -p /opt/cdn_dashboard/
+
+    - name: Run Django application using Gunicorn
+      community.general.gunicorn:
+        app: "cdn_dashboard.wsgi"
+        chdir: /opt/cdn_dashboard/
+        venv: /opt/cdn_dashboard/venv
+        
     - name: Running mongodb database
       ansible.builtin.systemd:
         name: mongod
