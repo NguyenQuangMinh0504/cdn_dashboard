@@ -13,6 +13,15 @@
       with_items: "{{ processes_on_port.stdout_lines }}"
       ignore_errors: yes
 
+    - name: Find all process using port 8000
+      ansible.builtin.shell: "lsof -i -i:8000"
+      register: processes_on_port
+      
+    - name: Stop all processes running on port 8000
+      ansible.builtin.shell: "kill -9 {{ item }}"
+      with_items: "{{ processes_on_port.stdout_lines }}"
+      ignore_errors: yes
+
     - name: Run openresty proxy server
       ansible.builtin.command: 
         chdir: /opt/cdn_dashboard/
