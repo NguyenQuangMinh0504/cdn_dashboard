@@ -87,9 +87,9 @@ def create(request: HttpRequest):
             {"auth_token": request.COOKIES["auth_token"],
              "domain": domain}
             )
-
-        domain_table_rdb.set(get_domain_cdn(domain),
-                             value=domain)
+        domain_cdn = get_domain_cdn(domain)
+        domain_table_rdb.set(name=domain_cdn, value=domain)
+        cache_key_setting_rdb.set(name=domain_cdn, value=1)
 
         return HttpResponseRedirect(redirect_to="/")
 
@@ -107,7 +107,9 @@ def delete(request: HttpRequest):
         data = request.POST
         domain = data["domain"]
         domain_table.delete_many({"domain": domain})
-        domain_table_rdb.delete(get_domain_cdn(domain))
+        domain_cdn = get_domain_cdn(domain)
+        domain_table_rdb.delete(domain_cdn)
+        cache_key_setting_rdb.delete(domain_cdn)
 
         return HttpResponseRedirect(redirect_to="/")
 
@@ -190,8 +192,8 @@ def setting(request: HttpRequest):
 
 def cache_delete(request: HttpRequest):
     if request.method == "POST":
-        print(request.POST)
-        print("hello world")
+        data = request.POST
+        print(data["delete-link-list"])
     return render(request=request,
                   template_name="cache_delete.html", context={})
 
