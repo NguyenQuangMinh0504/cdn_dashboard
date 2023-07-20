@@ -2,3 +2,4 @@ django
 pymongo
 redis
 gunicorn
+pika
