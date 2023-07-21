@@ -3,6 +3,7 @@ from django.shortcuts import render
 import secrets
 import redis
 import json
+import pika
 
 from .db import domain_table_rdb, total_bytes_sent_rdb, cache_key_setting_rdb
 from .db import domain_table, user_table
@@ -194,6 +195,18 @@ def cache_delete(request: HttpRequest):
     if request.method == "POST":
         data = request.POST
         print(data["delete-link-list"])
+
+        # Publish cache delete message
+        connection = pika.BlockingConnection(
+            pika.ConnectionParameters(host="35.184.46.172"))
+        channel = connection.channel()
+        channel.exchange_declare(exchange="cache_delete",
+                                 exchange_type="fanout")
+        channel.basic_publish(exchange="cache_delete",
+                              routing_key="",
+                              body="Hello world")
+        connection.close()
+
     return render(request=request,
                   template_name="cache_delete.html", context={})
 
