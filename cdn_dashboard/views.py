@@ -192,26 +192,30 @@ def setting(request: HttpRequest):
 
 
 def cache_delete(request: HttpRequest):
-    if request.method == "POST":
+    context = {}
+    if "auth_token" in request.COOKIES:
+        auth_token = request.COOKIES["auth_token"]
+        context["auth_token"] = auth_token
+        if request.method == "POST":
 
-        # Publish cache delete message
-        connection = pika.BlockingConnection(
-            pika.ConnectionParameters(
-                host="35.184.46.172",
-                credentials=pika.PlainCredentials("huststudent", "password")
+            # Publish cache delete message
+            connection = pika.BlockingConnection(
+                pika.ConnectionParameters(
+                    host="35.184.46.172",
+                    credentials=pika.PlainCredentials("huststudent", "password")
+                )
             )
-        )
-        channel = connection.channel()
-        channel.exchange_declare(exchange="cache_delete",
-                                 exchange_type="fanout")
-        for link in request.POST["delete-link-list"].splitlines():
-            channel.basic_publish(exchange="cache_delete",
-                                  routing_key="",
-                                  body=link)
-        connection.close()
+            channel = connection.channel()
+            channel.exchange_declare(exchange="cache_delete",
+                                     exchange_type="fanout")
+            for link in request.POST["delete-link-list"].splitlines():
+                channel.basic_publish(exchange="cache_delete",
+                                      routing_key="",
+                                      body=link)
+            connection.close()
 
     return render(request=request,
-                  template_name="cache_delete.html", context={})
+                  template_name="cache_delete.html", context=context)
 
 
 def test(request: HttpRequest):
