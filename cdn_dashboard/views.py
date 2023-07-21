@@ -198,7 +198,7 @@ def cache_delete(request: HttpRequest):
 
         # Publish cache delete message
         connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host="35.184.46.172"))
+            pika.ConnectionParameters(host="localhost"))
         channel = connection.channel()
         channel.exchange_declare(exchange="cache_delete",
                                  exchange_type="fanout")
