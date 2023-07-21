@@ -48,7 +48,6 @@ def index(request: HttpRequest):
                         )
                 domains.append(domain_data)
             context["domains"] = domains
-    print(context)
     return render(request=request,
                   template_name="index.html",
                   context=context)
