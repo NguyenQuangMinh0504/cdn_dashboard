@@ -195,7 +195,8 @@ def cache_delete(request: HttpRequest):
     if request.method == "POST":
         data = request.POST
         print(data["delete-link-list"])
-
+        print(type(data))
+        print(data)
         # Publish cache delete message
         connection = pika.BlockingConnection(
             pika.ConnectionParameters(
@@ -203,7 +204,6 @@ def cache_delete(request: HttpRequest):
                 credentials=pika.PlainCredentials("huststudent", "password")
             )
         )
-
         channel = connection.channel()
         channel.exchange_declare(exchange="cache_delete",
                                  exchange_type="fanout")
