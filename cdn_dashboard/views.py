@@ -197,6 +197,7 @@ def cache_delete(request: HttpRequest):
         print(data["delete-link-list"])
         print(type(data))
         print(data)
+        print(data["delete-link-list"].splitlines())
         # Publish cache delete message
         connection = pika.BlockingConnection(
             pika.ConnectionParameters(
