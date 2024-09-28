@@ -1,0 +1,47 @@
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - web_network
+  
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - web_network
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - "8000:8000"
+    networks:
+      - web_network
+    volumes:
+      - type: volume
+        source: web_static
+        target: /var/www/sapphirecdn.com/static/
+
+  web_server:
+    networks:
+      - web_network
+    build:
+      context: web_server
+      dockerfile: Dockerfile
+    ports:
+    - "443:443"
+    - "80:80"
+    volumes:
+    - type: volume
+      source: web_static
+      target: /var/www/sapphirecdn.com/static/
+
+networks:
+  web_network:
+    driver: bridge
+
+volumes:
+  web_static:
