@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 cdn_times = []
 origin_times = []
-get_number =  100
+get_number = 100
 for i in range(get_number):
     start_time = time.time()
     result = requests.get("https://saugau.sapphirecdn.com/static/mainpage/images/chad.jpeg")
