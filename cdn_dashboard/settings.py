@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-z-*d-1y@$g$o@2(#clpaiff6kt=n_-__35@7gr%zzxr18+cj^v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sapphirecdn.com', "localhost"]
+ALLOWED_HOSTS = ['sapphirecdn.com', "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -123,3 +123,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ["https://sapphirecdn.com"]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
