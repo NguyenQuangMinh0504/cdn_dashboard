@@ -21,3 +21,15 @@ resource "google_compute_instance" "default" {
     }
     tags = ["http-server","https-server"]
 }
+
+resource "google_compute_firewall" "allow_redis" {
+  name    = "allow-redis"
+  network = "default"
+  allow {
+    ports    = ["6379"]
+    protocol = "tcp"
+  }
+  priority    = 1000
+  direction = "INGRESS"
+  source_ranges = ["0.0.0.0/0"]
+}
