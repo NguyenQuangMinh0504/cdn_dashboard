@@ -3,3 +3,4 @@ venv
 .vscode
 dump.rdb
 db.sqlite3
+/deployment/terraform
